@@ -6,7 +6,7 @@ return [
     |--------------------------------------------------------------------------
     | Example: 'cas.myuniv.edu'.
     */
-    'cas_hostname'        => env('CAS_HOSTNAME', 'cas.myuniv.edu'),
+    'cas_hostname'        => env('CAS_HOSTNAME', 'cas.insa-rennes.fr'),
 
     /*
     |--------------------------------------------------------------------------
@@ -16,7 +16,7 @@ return [
     | recommended for protecting against DOS attacks.  If using load
     | balanced hosts, then separate each with a comma.
     */
-    'cas_real_hosts'      => env('CAS_REAL_HOSTS', 'cas.myuniv.edu'),
+    'cas_real_hosts'      => env('CAS_REAL_HOSTS', 'cas.insa-rennes.fr'),
 
 
     /*
@@ -102,7 +102,7 @@ return [
     | CAS Logout URI
     |--------------------------------------------------------------------------
     */
-    'cas_logout_url'      => env('CAS_LOGOUT_URL', 'https://cas.myuniv.edu/cas/logout'),
+    'cas_logout_url'      => env('CAS_LOGOUT_URL', 'https://cas.insa-rennes.fr/cas/logout'),
 
     /*
     |--------------------------------------------------------------------------

@@ -11,10 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['middleware' => 'cas.auth'], function() {
+
+  Route::get('/', ['as' => 'front.home', 'uses' => 'Front\PagesController@getHome']);
+
+  Route::get('/logout', function () {
+    cas()->logout();
+  });
 });
 
 Auth::routes();
-
-Route::get('/', ['as' => 'front.home', 'uses' => 'Front\PagesController@getHome']);
