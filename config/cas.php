@@ -141,7 +141,7 @@ return [
     | 3) false
     |--------------------------------------------------------------------------
     */
-    'cas_debug'           => env('CAS_DEBUG', false),
+    'cas_debug'           => env('CAS_DEBUG', true),
 
 
     /*
