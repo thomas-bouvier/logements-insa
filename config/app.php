@@ -186,6 +186,11 @@ return [
          * LaravelCollective
          */
         Collective\Html\HtmlServiceProvider::class,
+
+        /*
+         * Debugbar
+         */
+        Barryvdh\Debugbar\ServiceProvider::class,
     ],
 
     /*
@@ -237,6 +242,7 @@ return [
         'Cas' => Subfission\Cas\Facades\Cas::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
     ],
 
 ];
