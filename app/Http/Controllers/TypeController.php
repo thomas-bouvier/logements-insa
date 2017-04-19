@@ -48,6 +48,6 @@ class TypeController extends Controller
       $type = Type::findOrFail($id);
       $type->delete();
 
-      return redirect(action('TypeController@index'))->with('success', "La catégorie a bien été supprimé.");
+      return redirect(action('TypeController@index'))->with('success', "La catégorie a bien été supprimée.");
     }
 }
