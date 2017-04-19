@@ -6,8 +6,28 @@
   </div>
 
   <div class="form-group">
-    <label class="control-label">Slug</label>
-    {!! Form::text('slug', null, ['class' => 'form-control']) !!}
+    <label class="control-label">Montant du loyer (€)</label>
+    {!! Form::text('rental', null, ['class' => 'form-control']) !!}
+  </div>
+
+  <div class="form-group">
+    <label class="control-label">Type de bien</label>
+    {!! Form::select('type_id', App\Type::pluck('name', 'id'), null, ['class' => 'form-control']) !!}
+  </div>
+
+  <div class="form-group">
+    <label class="control-label">Quartier</label>
+    {!! Form::text('district', null, ['class' => 'form-control']) !!}
+  </div>
+
+  <div class="form-group">
+    <label class="control-label">Surface (m<sup>2</sup>)</label>
+    {!! Form::text('ground', null, ['class' => 'form-control']) !!}
+  </div>
+
+  <div class="form-group">
+    <label class="control-label">Description</label>
+    {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
   </div>
 
   <div class="form-group">

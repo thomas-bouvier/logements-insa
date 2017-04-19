@@ -13,8 +13,8 @@
     <thead>
       <tr>
         <th>Nom</th>
-        <th>Description</th>
         <th>Montant du loyer (€)</th>
+        <th>Type de bien</th>
         <th>Surface (m<sup>2</sup>)</th>
         <th>Actions</th>
       </tr>
@@ -24,8 +24,8 @@
       @foreach($bids as $bid)
       <tr>
         <td>{{ $bid->name }}</td>
-        <td>{{ $bid->description }}</td>
         <td>{{ $bid->rental }}</td>
+        <td>{{ $bid->type->name }}</td>
         <td>{{ $bid->ground }}</td>
         <td>
           <a class="btn btn-primary" href="{{ action('BidController@edit', $bid) }}">Éditer</a>

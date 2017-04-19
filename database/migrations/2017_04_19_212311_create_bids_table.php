@@ -20,7 +20,7 @@ class CreateBidsTable extends Migration
             $table->integer('user_id')->unsigned()->index();
             $table->integer('rental')->unsigned();
             $table->integer('ground')->unsigned();
-            $table->string('description');
+            $table->text('description');
             $table->string('district');
             $table->timestamps();
         });
