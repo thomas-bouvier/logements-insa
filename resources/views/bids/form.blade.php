@@ -1,4 +1,4 @@
-{!! Form::model($type, ['class' => 'form-horizontal', 'url' => action("TypeController@$action", $type), 'method' => $action == "store" ? "Post" : "Put"]) !!}
+{!! Form::model($bid, ['class' => 'form-horizontal', 'url' => action("BidController@$action", $bid), 'method' => $action == "store" ? "Post" : "Put"]) !!}
 
   <div class="form-group">
     <label class="control-label">Nom</label>

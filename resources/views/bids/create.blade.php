@@ -3,9 +3,9 @@
 @section('content')
 
 <div class="container">
-  <h4>Ajouter une catégorie</h4>
+  <h4>Ajouter une offre</h4>
 
-  @include('types.form', ['action' => 'store'])
+  @include('bids.form', ['action' => 'store'])
 </div>
 
 @endsection

@@ -36,14 +36,14 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        {{ config('app.name', 'Logements INSA') }}
                     </a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        <li><a href="{{ url('/type') }}">Catégories</a>
+                        <li><a href="{{ url('/types') }}">Catégories</a>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -55,6 +55,12 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
+                                <li>
+                                  <a href="{{ url('/bids') }}">Mes annonces</a>
+                                </li>
+
+                                <li class="divider"></li>
+
                                 <li>
                                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         Se déconnecter
@@ -75,7 +81,7 @@
 
         @yield('content')
 
-        
+
     </div>
 
     <!-- Scripts -->

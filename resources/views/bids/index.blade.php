@@ -3,31 +3,34 @@
 @section('content')
 
 <div class="container">
-  <h4>Gérer les catégories</h4>
+  <h4>Gérer mes annonces</h4>
 
   <p class="text-right">
-    <a class="btn btn-primary" href="{{ action('TypeController@create') }}">Ajouter une catégorie</a>
+    <a class="btn btn-primary" href="{{ action('BidController@create') }}">Ajouter une annonce</a>
   </p>
 
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>#</th>
         <th>Nom</th>
-        <th>Slug</th>
+        <th>Description</th>
+        <th>Montant du loyer (€)</th>
+        <th>Surface (m<sup>2</sup>)</th>
         <th>Actions</th>
       </tr>
     </thead>
 
     <tbody>
-      @foreach($types as $type)
+      @foreach($bids as $bid)
       <tr>
-        <td>{{ $type->id }}</td>
-        <td>{{ $type->name }}</td>
-        <td>{{ $type->slug }}</td>
+        <td>{{ $bid->name }}</td>
+        <td>{{ $bid->description }}</td>
+        <td>{{ $bid->rental }}</td>
+        <td>{{ $bid->ground }}</td>
         <td>
-          <a class="btn btn-primary" href="{{ action('TypeController@edit', $type) }}">Éditer</a>
-          <a class="btn btn-danger" href="{{ action('TypeController@destroy', $type) }}" data-method="delete" data-confirm="Voulez-vous vraiment supprimer cette catégorie ?">Supprimer</a>
+          <a class="btn btn-primary" href="{{ action('BidController@edit', $bid) }}">Éditer</a>
+          <a class="btn btn-primary" href="{{ action('BidController@destroy', $bid) }}" data-method="delete" data-confirm="Voulez-vous vraiment clotûrer cette annonce ?">Clôturer</a>
+          <a class="btn btn-danger" href="{{ action('BidController@destroy', $bid) }}" data-method="delete" data-confirm="Voulez-vous vraiment supprimer cette annonce ?">Supprimer</a>
         </td>
       </tr>
       @endforeach

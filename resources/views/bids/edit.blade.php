@@ -3,9 +3,9 @@
 @section('content')
 
 <div class="container">
-  <h4>Éditer la catégorie « {{ $type->name }} »</h4>
+  <h4>Éditer l'offre « {{ bid->name }} »</h4>
 
-  @include('types.form', ['action' => 'update'])
+  @include('bids.form', ['action' => 'update'])
 </div>
 
 @endsection
