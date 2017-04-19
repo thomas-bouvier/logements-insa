@@ -74,6 +74,8 @@
         @include('layouts.flash')
 
         @yield('content')
+
+        
     </div>
 
     <!-- Scripts -->
