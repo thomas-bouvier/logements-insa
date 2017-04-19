@@ -15,6 +15,8 @@ Route::group(['middleware' => 'cas.auth'], function() {
 
   Route::get('/', ['as' => 'front.home', 'uses' => 'Front\PagesController@getHome']);
 
+  Route::resource('type', 'TypeController');
+
   Route::get('/logout', function () {
     cas()->logout();
   });
