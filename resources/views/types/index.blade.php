@@ -27,7 +27,7 @@
         <td>{{ $type->slug }}</td>
         <td>
           <a class="btn btn-primary" href="{{ action('TypeController@edit', $type) }}">Éditer</a>
-          <a class="btn btn-primary" href="{{ action('TypeController@destroy', $type) }}">Supprimer</a>
+          <a class="btn btn-danger" href="{{ action('TypeController@destroy', $type) }}" data-method="delete" data-confirm="Voulez-vous vraiment supprimer cette catégorie ?">Supprimer</a>
         </td>
       </tr>
       @endforeach
