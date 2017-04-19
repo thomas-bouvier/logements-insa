@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\TypeRequest;
 use App\Type;
 
 class TypeController extends Controller
@@ -16,20 +16,30 @@ class TypeController extends Controller
 
     public function create()
     {
-      return view('types.create');
+      $type = new Type();
+
+      return view('types.create', compact('type'));
+    }
+
+    public function store(TypeRequest $request)
+    {
+      Type::create($request->only('name', 'slug'));
+
+      return redirect(action('TypeController@index'))->with('success', "La catégorie a bien été créée.");
     }
 
     public function edit($id)
     {
-      $types = Type::findOrFail($id);
+      $type = Type::findOrFail($id);
 
-      return view('types.edit', compact('types'));
+      return view('types.edit', compact('type'));
     }
 
-    public function update($id)
+    public function update($id, TypeRequest $request)
     {
+      $type = Type::findOrFail($id);
+      $type->update($request->only('name', 'slug'));
 
+      return redirect(action('TypeController@index'))->with('success', "La catégorie a bien été mise à jour.");
     }
-
-
 }
