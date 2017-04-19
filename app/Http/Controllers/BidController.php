@@ -38,7 +38,7 @@ class BidController extends Controller
     return view('bids.edit', compact('bid'));
   }
 
-  public function update($id, Request $request)
+  public function update($id, BidRequest $request)
   {
     $bid = Bid::findOrFail($id);
 

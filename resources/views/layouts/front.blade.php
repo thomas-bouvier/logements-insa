@@ -43,7 +43,7 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        <li><a href="{{ url('/types') }}">Catégories</a>
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -56,7 +56,13 @@
 
                             <ul class="dropdown-menu" role="menu">
                                 <li>
-                                  <a href="{{ url('/bids') }}">Mes annonces</a>
+                                  <a href="{{ url('/types') }}">Gérer les types de bien</a>
+                                </li>
+
+                                <li class="divider"></li>
+
+                                <li>
+                                  <a href="{{ url('/bids') }}">Gérer mes annonces</a>
                                 </li>
 
                                 <li class="divider"></li>
