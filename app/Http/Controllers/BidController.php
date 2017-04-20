@@ -9,7 +9,7 @@ class BidController extends Controller
 {
   public function __construct()
   {
-    $this->middleware('owner', ['except' => ['index']]);
+    $this->middleware('owner', ['except' => ['index', 'store', 'create']]);
   }
 
   public function getResource($id)
@@ -41,17 +41,13 @@ class BidController extends Controller
     return redirect(action('BidController@index'))->with('success', "Votre annonce a bien été créée.");
   }
 
-  public function edit($id)
+  public function edit($bid)
   {
-    $bid = Bid::findOrFail($id);
-
     return view('bids.edit', compact('bid'));
   }
 
-  public function update($id, BidRequest $request)
+  public function update($bid, BidRequest $request)
   {
-    $bid = Bid::findOrFail($id);
-
     $data = $request->all();
     $data['user_id'] = cas()->user();
 
@@ -60,9 +56,8 @@ class BidController extends Controller
     return redirect(action('BidController@index'))->with('success', "Votre annonce a bien été mise à jour.");
   }
 
-  public function destroy($id)
+  public function destroy($bid)
   {
-    $bid = Bid::findOrFail($id);
     $bid->delete();
 
     return redirect(action('BidController@index'))->with('success', "Votre annonce a bien été supprimée.");

@@ -34,6 +34,8 @@ class Owner
           }
         }
 
+        $request->route()->setParameter($request->route()->parameterNames()[0], $resource);
+
         return $next($request);
     }
 }
