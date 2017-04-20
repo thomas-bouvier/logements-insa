@@ -7,6 +7,16 @@ use App\Bid;
 
 class BidController extends Controller
 {
+  public function __construct()
+  {
+    $this->middleware('owner', ['except' => ['index']]);
+  }
+
+  public function getResource($id)
+  {
+    return Bid::findOrFail($id);
+  }
+
   public function index()
   {
     $bids = Bid::where('user_id', cas()->user())->get();
