@@ -20,6 +20,7 @@ class BidController extends Controller
   public function index()
   {
     $bids = Bid::where('user_id', cas()->user())->get();
+    $bids->load('type');
 
     return view('bids.index', compact('bids'));
   }
