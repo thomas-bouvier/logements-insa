@@ -3,7 +3,9 @@
 @section('content')
 
 <div class="container">
-  <p>Flux de posts</p>
+  @foreach ($bids as $bid)
+    @include ('bids.show')
+  @endforeach
 </div>
 
 @endsection

@@ -13,7 +13,7 @@
 
 Route::group(['middleware' => ['cas.auth', 'register']], function() {
 
-  Route::get('/', ['as' => 'front.home', 'uses' => 'Front\PagesController@getHome']);
+  Route::get('/', 'PagesController@home');
 
   Route::resource('types', 'TypeController');
   Route::resource('bids', 'BidController');
