@@ -30,9 +30,9 @@ class Bid extends Model
 
     public function detachPicture()
     {
-        unlink($this->getPictureDirectory() . "/{$this->id}.{$this->picture}");
+        unlink($this->getPictureDirectory() . '/' . $this->id . '.' . $this->picture);
 
-        foreach ($this->formats as $format)
+        foreach ($this->formats as $format => $dimensions)
             unlink(public_path() . $this->image($format));
     }
 
@@ -52,7 +52,7 @@ class Bid extends Model
         {
             if (!empty($this->picture))
             {
-                unlink($this->getPictureDirectory() . "/{$this->id}.{$this->picture}");
+                unlink($this->getPictureDirectory() . '/' . $this->id . '.' . $this->picture);
             }
 
             self::saved(function($instance) use ($picture)
@@ -60,7 +60,7 @@ class Bid extends Model
                 $picture = $picture->move($instance->getPictureDirectory(), $instance->id . '.' . $picture->getClientOriginalExtension());
 
                 foreach ($instance->formats as $format => $dimensions)
-                    Image::make($picture)->fit(dimensions[0], dimensions[1])->save(public_path() . $instance->image($format));
+                    Image::make($picture)->fit($dimensions[0], $dimensions[1])->save(public_path() . $instance->image($format));
             });
 
             $this->attributes['picture'] = $picture->getClientOriginalExtension();

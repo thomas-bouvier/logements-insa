@@ -89,7 +89,6 @@
 
         @yield('content')
 
-
     </div>
 
     <!-- Scripts -->

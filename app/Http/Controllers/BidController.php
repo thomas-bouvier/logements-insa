@@ -25,8 +25,10 @@ class BidController extends Controller
         return view('bids.index', compact('bids'));
     }
 
-    public function show($bid)
+    public function show($id)
     {
+        $bid = Bid::findOrFail($id);
+
         return view('bids.show', compact('bid'));
     }
 
