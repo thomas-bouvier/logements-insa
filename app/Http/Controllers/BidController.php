@@ -9,7 +9,7 @@ class BidController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('owner', ['except' => ['index', 'store', 'create']]);
+        $this->middleware('owner', ['except' => ['index', 'store', 'create', 'show']]);
     }
 
     public function getResource($id)
@@ -23,6 +23,11 @@ class BidController extends Controller
         $bids->load('type');
 
         return view('bids.index', compact('bids'));
+    }
+
+    public function show($bid)
+    {
+        return view('bids.show', compact('bid'));
     }
 
     public function create()

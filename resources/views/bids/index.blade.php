@@ -30,6 +30,7 @@
         <td>{{ $bid->type->name }}</td>
         <td>{{ $bid->ground }}</td>
         <td>
+          <a class="btn btn-primary" href="{{ action('BidController@show', $bid) }}">Voir</a>
           <a class="btn btn-default" href="{{ action('BidController@edit', $bid) }}">Éditer</a>
           <a class="btn btn-default" href="{{ action('BidController@destroy', $bid) }}" data-method="delete" data-confirm="Voulez-vous vraiment clotûrer l'annonce « {{ $bid->name }} » ?">Clôturer</a>
           <a class="btn btn-danger" href="{{ action('BidController@destroy', $bid) }}" data-method="delete" data-confirm="Voulez-vous vraiment supprimer l'annonce « {{ $bid->name }} » ?">Supprimer</a>

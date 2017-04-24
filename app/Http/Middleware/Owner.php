@@ -24,14 +24,14 @@ class Owner
 
         if ($resource->user_id != cas()->user())
         {
-          if ($request->ajax())
-          {
-            return response('Unauthorized.', 401);
-          }
-          else
-          {
-            return redirect('/');
-          }
+            if ($request->ajax())
+            {
+              return response('Unauthorized.', 401);
+            }
+            else
+            {
+              return redirect('/');
+            }
         }
 
         $request->route()->setParameter($request->route()->parameterNames()[0], $resource);
