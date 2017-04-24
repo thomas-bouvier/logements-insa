@@ -85,6 +85,7 @@ return [
     'unique'               => 'La valeur du champ :attribute est déjà utilisée.',
     'uploaded'             => "Le fichier du champ :attribute n'a pu être téléchargé.",
     'url'                  => "Le format de l'URL de :attribute n'est pas valide.",
+    'dimension'            => "La taille de l'image doit être supérieure à :widthx:height pixels.",
 
     /*
     |--------------------------------------------------------------------------
