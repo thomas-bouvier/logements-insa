@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['middleware' => 'cas.auth'], function() {
+Route::group(['middleware' => ['cas.auth', 'register']], function() {
 
   Route::get('/', ['as' => 'front.home', 'uses' => 'Front\PagesController@getHome']);
 
