@@ -23,13 +23,21 @@ class BidRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'name' => "required|min:20",
             'district' => "required|min:2",
             'description' => "required|min:140",
             'ground' => "required|numeric",
             'rental' => "required|numeric",
-            'type_id' => "required|exists:types,id"
+            'type_id' => "required|exists:types,id",
+            'picture' => "image|dimension:940,530"
         ];
+
+        if ($this->method() == 'POST')
+        {
+            $rules['picture'] .= '|required';
+        }
+
+        return $rules;
     }
 }

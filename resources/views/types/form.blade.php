@@ -12,7 +12,11 @@
 
   <div class="form-group">
     <button type="submit" class="btn btn-primary">
-      Sauvegarder
+      @if ($action == 'store')
+        Envoyer
+      @else
+        Mettre à jour
+      @endif
     </button>
   </div>
 

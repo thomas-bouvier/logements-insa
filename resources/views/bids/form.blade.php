@@ -1,4 +1,4 @@
-{!! Form::model($bid, ['class' => 'form-horizontal', 'url' => action("BidController@$action", $bid), 'method' => $action == "store" ? "Post" : "Put"]) !!}
+{!! Form::model($bid, ['files' => true, 'class' => 'form-horizontal', 'url' => action("BidController@$action", $bid), 'method' => $action == "store" ? "Post" : "Put"]) !!}
 
   <div class="form-group">
     <label class="control-label">Nom</label>
@@ -26,13 +26,22 @@
   </div>
 
   <div class="form-group">
+    <label class="control-label">Photo</label>
+    {!! Form::file('picture', ['class' => 'form-control']) !!}
+  </div>
+
+  <div class="form-group">
     <label class="control-label">Description</label>
     {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
   </div>
 
   <div class="form-group">
     <button type="submit" class="btn btn-primary">
-      Sauvegarder
+      @if ($action == 'store')
+        Envoyer
+      @else
+        Mettre à jour
+      @endif
     </button>
   </div>
 
