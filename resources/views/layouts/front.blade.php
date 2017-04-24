@@ -55,11 +55,13 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
+                              @if (App\User::find(cas()->user())->role == 'admin')
                                 <li>
                                   <a href="{{ url('/types') }}">Gérer les types de bien</a>
                                 </li>
 
                                 <li class="divider"></li>
+                              @endif
 
                                 <li>
                                   <a href="{{ url('/bids') }}">Gérer mes annonces</a>

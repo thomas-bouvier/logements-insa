@@ -7,6 +7,11 @@ use App\Type;
 
 class TypeController extends Controller
 {
+    public function __construct()
+    {
+      $this->middleware('admin');
+    }
+
     public function index()
     {
       $types = Type::all();
