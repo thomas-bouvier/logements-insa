@@ -12,7 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/bootswatch.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css?value=1') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script>

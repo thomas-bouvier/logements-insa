@@ -2,8 +2,12 @@
   font-size: 1.15em;
 }
 
-article.bid {
-  margin-bottom: 50px;
+.bid {
+  margin-bottom: 50px !important;
+}
+
+.bid-title {
+  margin-bottom: 10px !important;
 }
 
 h5.bid-description-title {
