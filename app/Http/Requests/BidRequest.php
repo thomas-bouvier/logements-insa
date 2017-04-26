@@ -30,6 +30,7 @@ class BidRequest extends FormRequest
             'ground' => "required|numeric",
             'rental' => "required|numeric",
             'type_id' => "required|exists:types,id",
+            'email' => "required|email",
             'picture' => "image|dimension:940,530"
         ];
 
