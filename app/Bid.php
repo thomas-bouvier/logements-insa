@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Intervention\Image\ImageManagerStatic as Image;
+use Storage;
 
 class Bid extends Model
 {
@@ -41,13 +42,40 @@ class Bid extends Model
         return $this->belongsTo('App\Type');
     }
 
-    public function image($size)
+    public function setPhotosAttribute($photos)
     {
-        return '/' . $this->getPictureDirectory() . '/' . $this->id . '_' . $size . '.jpg';
-    }
+        $index = 1;
 
-    public function setPictureAttribute($picture)
-    {
+        foreach($photos as $photo)
+        {
+            self::saved(function($instance) use ($photo, $index)
+            {
+                foreach ($instance->formats as $format => $dimensions)
+                {
+                    $filename = $instance->id . '_' . $index . '_' . $format . '.' . $photo->getClientOriginalExtension();
+
+                    Photo::create([
+                        'bid_id' => $this->id,
+                        'filename' => $filename
+                      ]);
+
+                    Storage::disk('public')->put(ceil($instance->id / 250) . '/' . $filename, Image::make($photo)->fit($dimensions[0], $dimensions[1])->stream()->__toString());
+                }
+
+                $filename = $instance->id . '_' . $index . '.' . $photo->getClientOriginalExtension();
+
+                Photo::create([
+                    'bid_id' => $this->id,
+                    'filename' => $filename
+                  ]);
+
+                Storage::disk('public')->put(ceil($instance->id / 250) . '/' . $filename, Image::make($photo)->stream()->__toString());
+            });
+
+            $index++;
+        }
+
+        /*
         if (is_object($picture) && $picture->isValid())
         {
             if (!empty($this->picture))
@@ -65,11 +93,12 @@ class Bid extends Model
 
             $this->attributes['picture'] = $picture->getClientOriginalExtension();
         }
+        */
     }
 
-    public function getPictureDirectory()
+    public function photo($format, $number)
     {
-        return 'img/pictures/' . ceil($this->id / 1000);
+        return asset('storage/' . ceil($this->id / 250) . '/' . $this->id . '_' . $number . '_' . $format . '.jpg');
     }
 
     public function scopeLatest($query)

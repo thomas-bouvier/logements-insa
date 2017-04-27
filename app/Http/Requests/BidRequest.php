@@ -31,12 +31,20 @@ class BidRequest extends FormRequest
             'rental' => "required|numeric",
             'type_id' => "required|exists:types,id",
             'email' => "required|email",
-            'picture' => "image|dimension:940,530"
         ];
 
-        if ($this->method() == 'POST')
+        $photos = count($this->input('photos'));
+        foreach (range(0, $photos) as $index)
         {
-            $rules['picture'] .= '|required';
+            $rules['photos.' . $index] = 'image|dimension:940,530|mimes:jpeg,bmp,png|max:5000';
+
+            if ($index == 0)
+            {
+                if ($this->method() == 'POST')
+                {
+                    $rules['photos.' . $index] .= '|required';
+                }
+            }
         }
 
         return $rules;

@@ -21,7 +21,8 @@
   <div class="clearfix"></div>
 
   <p class="text-center">
-    <img src="{{ url($bid->image('large')) }}" class="img-responsive" alt="{{ $bid->name }}">
+    <img src="{{ $bid->photo('large', 1) }}" class="img-responsive" alt="{{ $bid->name }}">
+    <img src="{{ $bid->photo('thumb', 2) }}" class="img-responsive" alt="{{ $bid->name }}">
   </p>
 
   <h5 class="bid-description-title">Description</h5>

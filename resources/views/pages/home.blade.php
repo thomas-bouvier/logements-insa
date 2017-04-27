@@ -10,7 +10,7 @@
       </div>
 
       <p class="text-center">
-        <img src="{{ url($bid->image('large')) }}" class="img-responsive" alt="{{ $bid->name }}">
+        <img src="{{ $bid->photo('large', 1) }}" class="img-responsive" alt="{{ $bid->name }}">
       </p>
 
       <a class="btn btn-primary" href="{{ action('BidController@show', $bid) }}">Voir</a>
