@@ -59,7 +59,7 @@ class Bid extends Model
                         'filename' => $filename
                       ]);
 
-                    Storage::disk('public')->put(ceil($instance->id / 250) . '/' . $filename, Image::make($photo)->fit($dimensions[0], $dimensions[1])->stream()->__toString());
+                    Storage::disk('public')->put(getStorageDirectory() . '/' . $filename, Image::make($photo)->fit($dimensions[0], $dimensions[1])->stream()->__toString());
                 }
 
                 $filename = $instance->id . '_' . $index . '.' . $photo->getClientOriginalExtension();
@@ -69,40 +69,25 @@ class Bid extends Model
                     'filename' => $filename
                   ]);
 
-                Storage::disk('public')->put(ceil($instance->id / 250) . '/' . $filename, Image::make($photo)->stream()->__toString());
+                Storage::disk('public')->put(getStorageDirectory() . '/' . $filename, Image::make($photo)->stream()->__toString());
             });
 
             $index++;
         }
-
-        /*
-        if (is_object($picture) && $picture->isValid())
-        {
-            if (!empty($this->picture))
-            {
-                unlink($this->getPictureDirectory() . '/' . $this->id . '.' . $this->picture);
-            }
-
-            self::saved(function($instance) use ($picture)
-            {
-                $picture = $picture->move($instance->getPictureDirectory(), $instance->id . '.' . $picture->getClientOriginalExtension());
-
-                foreach ($instance->formats as $format => $dimensions)
-                    Image::make($picture)->fit($dimensions[0], $dimensions[1])->save(public_path() . $instance->image($format));
-            });
-
-            $this->attributes['picture'] = $picture->getClientOriginalExtension();
-        }
-        */
     }
 
     public function photo($format, $number)
     {
-        return asset('storage/' . ceil($this->id / 250) . '/' . $this->id . '_' . $number . '_' . $format . '.jpg');
+        return asset('storage/' . getStorageDirectory() . '/' . $this->id . '_' . $number . '_' . $format . '.jpg');
     }
 
     public function scopeLatest($query)
     {
         return $query->orderBy('created_at', 'DESC');
+    }
+
+    public function getStorageDirectory()
+    {
+        return ceil($this->id / 250);
     }
 }
