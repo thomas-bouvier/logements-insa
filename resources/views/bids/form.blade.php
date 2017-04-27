@@ -51,8 +51,8 @@
   <div class="form-group">
     <label class="control-label">Photo</label>
     {!! Form::file('photos[]', ['class' => 'form-control', 'multiple' => true]) !!}
-    @if ($bid->picture)
-      <img src="{{ url($bid->image('thumb')) }}" class="img-responsive" alt="{{ $bid->name }}" style="margin-top: 10px">
+    @if ($action == 'update')
+      <img src="{{ $bid->photo('thumb', 1) }}" class="img-responsive" alt="{{ $bid->name }}" style="margin-top: 10px">
     @endif
   </div>
 
