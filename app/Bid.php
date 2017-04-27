@@ -23,18 +23,10 @@ class Bid extends Model
 
         static::deleted(function($instance)
         {
-            $instance->detachPicture();
+            $instance->detachPhotos();
 
             return true;
         });
-    }
-
-    public function detachPicture()
-    {
-        unlink($this->getPictureDirectory() . '/' . $this->id . '.' . $this->picture);
-
-        foreach ($this->formats as $format => $dimensions)
-            unlink(public_path() . $this->image($format));
     }
 
     public function type()
@@ -73,6 +65,19 @@ class Bid extends Model
             });
 
             $index++;
+        }
+    }
+
+    public function detachPhotos()
+    {
+        for ($i = 1; $i <= $this->photo_count; $i++)
+        {
+            Storage::disk('public')->delete($this->getStorageDirectory() . '/' . $this->id . '_' . $i . '.jpg');
+
+            foreach ($this->formats as $format => $dimensions)
+            {
+                Storage::disk('public')->delete($this->getStorageDirectory() . '/' . $this->id . '_' . $i . '_' . $format . '.jpg');
+            }
         }
     }
 
