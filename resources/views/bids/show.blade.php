@@ -21,8 +21,9 @@
   <div class="clearfix"></div>
 
   <p class="text-center">
-    <img src="{{ $bid->photo('large', 1) }}" class="img-responsive" alt="{{ $bid->name }}">
-    <img src="{{ $bid->photo('thumb', 2) }}" class="img-responsive" alt="{{ $bid->name }}">
+    @for ($i = 1; $i <= $bid->photo_count; $i++)
+      <img src="{{ $bid->photo('thumb', $i) }}" class="img-responsive" alt="{{ $bid->name }}">
+    @endfor
   </p>
 
   <h5 class="bid-description-title">Description</h5>

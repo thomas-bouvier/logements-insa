@@ -42,7 +42,9 @@ class BidController extends Controller
     public function store(BidRequest $request)
     {
         $data = $request->all();
+
         $data['user_id'] = cas()->user();
+        $data['photo_count'] = count($request->files->get('photos'));
 
         Bid::create($data);
 

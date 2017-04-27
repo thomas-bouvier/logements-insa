@@ -59,7 +59,7 @@ class Bid extends Model
                         'filename' => $filename
                       ]);
 
-                    Storage::disk('public')->put(getStorageDirectory() . '/' . $filename, Image::make($photo)->fit($dimensions[0], $dimensions[1])->stream()->__toString());
+                    Storage::disk('public')->put($this->getStorageDirectory() . '/' . $filename, Image::make($photo)->fit($dimensions[0], $dimensions[1])->stream()->__toString());
                 }
 
                 $filename = $instance->id . '_' . $index . '.' . $photo->getClientOriginalExtension();
@@ -69,7 +69,7 @@ class Bid extends Model
                     'filename' => $filename
                   ]);
 
-                Storage::disk('public')->put(getStorageDirectory() . '/' . $filename, Image::make($photo)->stream()->__toString());
+                Storage::disk('public')->put($this->getStorageDirectory() . '/' . $filename, Image::make($photo)->stream()->__toString());
             });
 
             $index++;
@@ -78,7 +78,7 @@ class Bid extends Model
 
     public function photo($format, $number)
     {
-        return asset('storage/' . getStorageDirectory() . '/' . $this->id . '_' . $number . '_' . $format . '.jpg');
+        return asset('storage/' . $this->getStorageDirectory() . '/' . $this->id . '_' . $number . '_' . $format . '.jpg');
     }
 
     public function scopeLatest($query)

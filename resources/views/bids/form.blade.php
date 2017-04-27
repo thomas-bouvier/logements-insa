@@ -52,7 +52,9 @@
     <label class="control-label">Photos</label>
     {!! Form::file('photos[]', ['class' => 'form-control', 'multiple' => true]) !!}
     @if ($action == 'update')
-      <img src="{{ $bid->photo('thumb', 1) }}" class="img-responsive" alt="{{ $bid->name }}" style="margin-top: 10px">
+      @for ($i = 1; $i <= $bid->photo_count; $i++)
+        <img src="{{ $bid->photo('thumb', $i) }}" class="img-responsive" alt="{{ $bid->name }}">
+      @endfor
     @endif
   </div>
 
