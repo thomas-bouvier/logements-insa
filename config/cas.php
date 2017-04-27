@@ -130,7 +130,7 @@ return [
     | this feature, you may be able to retrieve user meta data.
     |--------------------------------------------------------------------------
     */
-    'cas_enable_saml'     => env('CAS_ENABLE_SAML', true),
+    'cas_enable_saml'     => env('CAS_ENABLE_SAML', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -158,5 +158,5 @@ return [
     | This should only be used for developmental purposes.  getAttributes()
     | will return null in this condition.
      */
-    'cas_masquerade'      => env('CAS_MASQUERADE', '222')
+    'cas_masquerade'      => env('CAS_MASQUERADE', '333')
 ];
