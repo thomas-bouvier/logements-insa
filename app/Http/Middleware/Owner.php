@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use \ReflectionMethod;
+use App\User;
 
 class Owner
 {
@@ -22,15 +23,15 @@ class Owner
         $reflection_method = new ReflectionMethod($controller_name, 'getResource');
         $resource = $reflection_method->invokeArgs($controller, $request->route()->parameters());
 
-        if ($resource->user_id != cas()->user())
+        if (User::where('login', cas()->user())->first()->id != $resource->user_id)
         {
             if ($request->ajax())
             {
-              return response('Unauthorized.', 401);
+                return response('Unauthorized.', 401);
             }
             else
             {
-              return redirect('/');
+                return redirect('/');
             }
         }
 

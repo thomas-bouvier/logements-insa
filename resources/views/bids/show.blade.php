@@ -13,7 +13,7 @@
     </div>
 
     <p class="pull-right">
-      @if (cas()->user() == $bid->user_id)
+      @if (App\User::where('login', cas()->user())->first()->id == $bid->user_id)
         <a class="btn btn-default" href="{{ action('BidController@edit', $bid) }}">Éditer</a>
         <a class="btn btn-danger" href="{{ action('BidController@destroy', $bid) }}" data-method="delete" data-confirm="Voulez-vous vraiment supprimer l'annonce « {{ $bid->name }} » ?">Supprimer</a>
       @else
