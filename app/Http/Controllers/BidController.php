@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BidRequest;
 use App\Bid;
+use App\User;
 
 class BidController extends Controller
 {
@@ -19,7 +20,9 @@ class BidController extends Controller
 
     public function index()
     {
-        $bids = Bid::where('user_id', cas()->user())->get();
+        $user_id = User::where('login', cas()->user())->first()->id;
+
+        $bids = Bid::where('user_id', $user_id)->get();
         $bids->load('type');
 
         return view('bids.index', compact('bids'));
@@ -43,7 +46,7 @@ class BidController extends Controller
     {
         $data = $request->all();
 
-        $data['user_id'] = cas()->user();
+        $data['user_id'] = User::where('login', cas()->user())->first()->id;
         $data['photo_count'] = count($request->files->get('photos'));
 
         Bid::create($data);
@@ -59,7 +62,7 @@ class BidController extends Controller
     public function update($bid, BidRequest $request)
     {
         $data = $request->all();
-        $data['user_id'] = cas()->user();
+        $data['user_id'] = User::where('login', cas()->user())->first()->id;
 
         $bid->update($data);
 

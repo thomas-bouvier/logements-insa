@@ -16,7 +16,7 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-        if (User::find(cas()->user())->role != 'admin')
+        if (User::where('login', cas()->user())->first()->role != 'admin')
         {
             if ($request->ajax())
             {

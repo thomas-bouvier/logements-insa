@@ -6,7 +6,7 @@
   @foreach ($bids as $bid)
     <article class="bid">
       <div class="bid-title">
-        <h4>{{ $bid->name }}</h4>
+        <h4>{{ $bid->name }} <small>par {{ App\User::where('id', $bid->user_id)->first()->login }}</small></h4>
       </div>
 
       <p class="text-center">
