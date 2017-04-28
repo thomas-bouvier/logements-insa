@@ -12,7 +12,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/bootswatch.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/style.css?value=1') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/lightgallery.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -93,7 +94,11 @@
     </div>
 
     <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/laravel.js') }}"></script>
+    <script src="{{ asset('js/lightgallery.min.js') }}"></script>
+    <script src="{{ asset('js/custom.js') }}"></script>
 </body>
 </html>

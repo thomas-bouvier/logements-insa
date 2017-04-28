@@ -54,7 +54,7 @@ class Bid extends Model
                     Storage::disk('public')->put($this->getStorageDirectory() . '/' . $filename, Image::make($photo)->fit($dimensions[0], $dimensions[1])->stream()->__toString());
                 }
 
-                $filename = $instance->id . '_' . $index . '.' . $photo->getClientOriginalExtension();
+                $filename = $instance->id . '_' . $index . '_original.' . $photo->getClientOriginalExtension();
 
                 Photo::create([
                     'bid_id' => $this->id,

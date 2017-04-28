@@ -24,11 +24,13 @@
 
   <div class="clearfix"></div>
 
-  <p class="text-center">
+  <div id="lightgallery">
     @for ($i = 1; $i <= $bid->photo_count; $i++)
-      <img src="{{ $bid->photo('thumb', $i) }}" class="img-responsive" alt="{{ $bid->name }}">
+      <a href="{{ $bid->photo('original', $i) }}">
+        <img src="{{ $bid->photo('thumb', $i) }}" class="img-responsive" alt="{{ $bid->name }}">
+      </a>
     @endfor
-  </p>
+  </div>
 
   <h5 class="bid-description-title">Description</h5>
 
