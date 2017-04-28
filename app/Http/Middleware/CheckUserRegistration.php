@@ -16,7 +16,7 @@ class CheckUserRegistration
      */
     public function handle($request, Closure $next)
     {
-        User::firstOrCreate(['id' => cas()->user()]);
+        User::firstOrCreate(['login' => cas()->user()]);
 
         return $next($request);
     }

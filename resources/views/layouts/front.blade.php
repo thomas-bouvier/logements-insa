@@ -56,7 +56,7 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                              @if (App\User::find(cas()->user())->role == 'admin')
+                              @if (App\User::where('login', cas()->user())->first()->role == 'admin')
                                 <li>
                                   <a href="{{ url('/types') }}">Gérer les types de bien</a>
                                 </li>
