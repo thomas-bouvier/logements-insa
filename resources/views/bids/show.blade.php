@@ -5,7 +5,11 @@
 <div class="container">
   <div class="bid-title">
     <div class="pull-left">
-      <h4>{{ $bid->name }}</h4>
+      @if (App\User::where('login', cas()->user())->first()->id == $bid->user_id)
+        <h4>{{ $bid->name }}</h4>
+      @else
+        <h4>{{ $bid->name }} <small>par {{ App\User::where('id', $bid->user_id)->first()->login }}</small></h4>
+      @endif
     </div>
 
     <p class="pull-right">
