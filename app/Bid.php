@@ -54,9 +54,14 @@ class Bid extends Model
 
     public function photo($format, $number)
     {
-        $filenames = Photo::where('bid_id', $this->id)->get();
-        dd($filenames);
-        return asset('storage/' . $this->getStorageDirectory() . '/' . $this->id . '_' . $number . '_' . $format . '.jpg');
+        $filenames = Photo::where('bid_id', $this->id)->where('format', $format)->get()[$number - 1]['filename'];
+
+        return asset('storage/' . $this->getStorageDirectory($this->id) . '/' . $filenames);
+    }
+
+    public function getStorageDirectory($bid_id)
+    {
+        return ceil($bid_id / 250);
     }
 
     public function scopeLatest($query)

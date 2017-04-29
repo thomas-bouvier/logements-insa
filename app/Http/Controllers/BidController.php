@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BidRequest;
 use App\Bid;
 use App\User;
+use App\Photo;
 
 class BidController extends Controller
 {
@@ -64,6 +65,7 @@ class BidController extends Controller
     {
         $data = $request->all();
         $data['user_id'] = User::where('login', cas()->user())->first()->id;
+        $data['photo_count'] = count(Photo::where('bid_id', $bid->id)->where('format', 'original')->get());
 
         $bid->update($data);
 
