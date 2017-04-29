@@ -18,8 +18,19 @@ Dropzone.options.myDropzone = {
         formData.append("id", upload.dataset.id);
     },
     init: function() {
+
+        var myDropzone = this;
+
+        $.get('/server-photos/' + upload.dataset.id, function(data) {
+            $.each(data.photos, function (key, value) {
+                var file = {name: value.filename, size: value.size};
+                myDropzone.options.addedfile.call(myDropzone, file);
+                myDropzone.options.thumbnail.call(myDropzone, file, value.server);
+                myDropzone.emit("complete", file);
+            });
+        });
         this.on("success", function(file, response) {
-          
+
         });
         this.on("removedfile", function(file) {
 

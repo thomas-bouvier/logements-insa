@@ -18,6 +18,8 @@ Route::group(['middleware' => ['cas.auth', 'register']], function() {
   Route::post('/upload', 'UploadController@upload');
   Route::get('/upload', 'UploadController@upload');
 
+  Route::get('server-photos/{id}', ['uses' => 'UploadController@getServerPhotos']);
+
   Route::resource('types', 'TypeController');
   Route::resource('bids', 'BidController');
 

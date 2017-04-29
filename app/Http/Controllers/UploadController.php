@@ -9,6 +9,7 @@ use App\Bid;
 use App\Photo;
 use Intervention\Image\ImageManagerStatic as Image;
 use Storage;
+use File;
 
 class UploadController extends Controller
 {
@@ -46,6 +47,30 @@ class UploadController extends Controller
         ]);
 
         Storage::disk('public')->put($this->getStorageDirectory($bid_id) . '/' . $filename, Image::make($photo)->stream()->__toString());
+    }
+
+    public function getServerPhotos($bid_id)
+    {
+        $res = [];
+
+        $photos = Photo::where('bid_id', $bid_id)->where('format', 'thumb')->get();
+
+        for ($i = 1; $i <= Bid::where('id', $bid_id)->first()->photo_count; $i++)
+        {
+            $photo = $photos[$i - 1];
+
+            $filename = $photo->filename;
+
+            $res[] = [
+                'filename' => $filename,
+                'size' => Storage::disk('public')->size($this->getStorageDirectory($bid_id) . '/' . $filename),
+                'server' => Storage::disk('public')->url($this->getStorageDirectory($bid_id) . '/' . $filename)
+            ];
+        }
+
+        return response()->json([
+            'photos' => $res
+        ]);
     }
 
     public function getStorageDirectory($bid_id)
