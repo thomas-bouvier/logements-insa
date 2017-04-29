@@ -13,7 +13,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/bootswatch.css') }}" rel="stylesheet">
     <link href="{{ asset('css/lightgallery.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dropzone.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dropzone.css?version=1') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
     <!-- Scripts -->

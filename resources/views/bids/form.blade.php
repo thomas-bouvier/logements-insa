@@ -55,18 +55,6 @@
         <div data-id="{{ $bid->id }}" class="dropzone dropzone-previews" id="my-dropzone"></div>
       </div>
 
-      <!--
-      <div class="form-group">
-        <label class="control-label">Photos</label>
-        {!! Form::file('photos[]', ['class' => 'form-control', 'multiple' => true]) !!}
-        @if ($action == 'update')
-          @for ($i = 1; $i <= $bid->photo_count; $i++)
-            <img src="{{ $bid->photo('thumb', $i) }}" class="img-responsive" alt="{{ $bid->name }}">
-          @endfor
-        @endif
-      </div>
-      -->
-
       <div class="form-group">
         <label class="control-label">Description</label>
         {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
