@@ -10,7 +10,7 @@ class PagesController extends Controller
 {
     public function home()
     {
-        $bids = Bid::latest()->limit(10)->paginate(10);
+        $bids = Bid::notDraft()->latest()->limit(10)->paginate(10);
 
         return view('pages.home', compact('bids'));
     }

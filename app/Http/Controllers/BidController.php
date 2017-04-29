@@ -37,9 +37,11 @@ class BidController extends Controller
 
     public function create()
     {
-        $bid = new Bid();
+        //$bid = new Bid();
+        $bid = Bid::draft();
 
-        return view('bids.create', compact('bid'));
+        //return view('bids.create', compact('bid'));
+        return $this->edit($bid);
     }
 
     public function store(BidRequest $request)
@@ -47,7 +49,6 @@ class BidController extends Controller
         $data = $request->all();
 
         $data['user_id'] = User::where('login', cas()->user())->first()->id;
-        $data['photo_count'] = count($request->files->get('photos'));
 
         Bid::create($data);
 

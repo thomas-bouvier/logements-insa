@@ -29,6 +29,11 @@ class Bid extends Model
         });
     }
 
+    public static function draft()
+    {
+        return self::firstOrCreate(['name' => null, 'user_id' => User::where('login', cas()->user())->first()->id], ['type_id' => 0, 'user_id' => 0, 'rental' => 0, 'ground' => 0, 'email' => '', 'district' => '', 'description' => '', 'photo_count' => 0]);
+    }
+
     public function type()
     {
         return $this->belongsTo('App\Type');
@@ -49,7 +54,7 @@ class Bid extends Model
 
     public function photo($format, $number)
     {
-        $filenames = Photo::where('bid_id', $this->id);
+        $filenames = Photo::where('bid_id', $this->id)->get();
         dd($filenames);
         return asset('storage/' . $this->getStorageDirectory() . '/' . $this->id . '_' . $number . '_' . $format . '.jpg');
     }
@@ -57,5 +62,10 @@ class Bid extends Model
     public function scopeLatest($query)
     {
         return $query->orderBy('created_at', 'DESC');
+    }
+
+    public function scopeNotDraft($query)
+    {
+        return $query->whereNotNull('name');
     }
 }

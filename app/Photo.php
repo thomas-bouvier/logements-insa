@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Photo extends Model
 {
-    protected $fillable = ['bid_id', 'filename'];
+    protected $fillable = ['bid_id', 'filename', 'format'];
 
     public function bid()
     {

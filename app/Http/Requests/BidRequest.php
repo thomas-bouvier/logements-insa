@@ -33,20 +33,6 @@ class BidRequest extends FormRequest
             'email' => "required|email",
         ];
 
-        $photos = count($this->input('photos'));
-        foreach (range(0, $photos) as $index)
-        {
-            $rules['photos.' . $index] = 'image|dimension:940,530|mimes:jpeg,bmp,png|max:5000';
-
-            if ($index == 0)
-            {
-                if ($this->method() == 'POST')
-                {
-                    $rules['photos.' . $index] .= '|required';
-                }
-            }
-        }
-
         return $rules;
     }
 }
