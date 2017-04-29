@@ -34,40 +34,6 @@ class Bid extends Model
         return $this->belongsTo('App\Type');
     }
 
-    public function setPhotosAttribute($photos)
-    {
-        $index = 1;
-
-        foreach($photos as $photo)
-        {
-            self::saved(function($instance) use ($photo, $index)
-            {
-                foreach ($instance->formats as $format => $dimensions)
-                {
-                    $filename = $instance->id . '_' . $index . '_' . $format . '.' . $photo->getClientOriginalExtension();
-
-                    Photo::create([
-                        'bid_id' => $this->id,
-                        'filename' => $filename
-                      ]);
-
-                    Storage::disk('public')->put($this->getStorageDirectory() . '/' . $filename, Image::make($photo)->fit($dimensions[0], $dimensions[1])->stream()->__toString());
-                }
-
-                $filename = $instance->id . '_' . $index . '_original.' . $photo->getClientOriginalExtension();
-
-                Photo::create([
-                    'bid_id' => $this->id,
-                    'filename' => $filename
-                  ]);
-
-                Storage::disk('public')->put($this->getStorageDirectory() . '/' . $filename, Image::make($photo)->stream()->__toString());
-            });
-
-            $index++;
-        }
-    }
-
     public function detachPhotos()
     {
         for ($i = 1; $i <= $this->photo_count; $i++)

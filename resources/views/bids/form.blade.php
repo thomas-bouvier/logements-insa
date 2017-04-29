@@ -48,6 +48,9 @@
     </div>
   </div>
 
+  <div data-id="{{ $bid->id }}" class="dropzone dropzone-previews" id="my-dropzone"></div>
+
+  <!--
   <div class="form-group">
     <label class="control-label">Photos</label>
     {!! Form::file('photos[]', ['class' => 'form-control', 'multiple' => true]) !!}
@@ -57,6 +60,7 @@
       @endfor
     @endif
   </div>
+  -->
 
   <div class="form-group">
     <label class="control-label">Description</label>

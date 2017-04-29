@@ -15,6 +15,9 @@ Route::group(['middleware' => ['cas.auth', 'register']], function() {
 
   Route::get('/', 'PagesController@home');
 
+  Route::post('/upload', 'UploadController@upload');
+  Route::get('/upload', 'UploadController@upload');
+
   Route::resource('types', 'TypeController');
   Route::resource('bids', 'BidController');
 

@@ -75,4 +75,43 @@ class BidController extends Controller
 
         return redirect(action('BidController@index'))->with('success', "Votre annonce a bien été supprimée.");
     }
+
+    public function uploadPhotos($photos)
+    {
+        $formats = [
+          'thumb' => [360, 200],
+          'large' => [940, 530]
+        ];
+
+        $index = 1;
+
+        foreach($photos as $photo)
+        {
+            self::saved(function($instance) use ($photo, $index)
+            {
+                foreach ($instance->formats as $format => $dimensions)
+                {
+                    $filename = $instance->id . '_' . $index . '_' . $format . '.' . $photo->getClientOriginalExtension();
+
+                    Photo::create([
+                        'bid_id' => $this->id,
+                        'filename' => $filename
+                      ]);
+
+                    Storage::disk('public')->put($this->getStorageDirectory() . '/' . $filename, Image::make($photo)->fit($dimensions[0], $dimensions[1])->stream()->__toString());
+                }
+
+                $filename = $instance->id . '_' . $index . '_original.' . $photo->getClientOriginalExtension();
+
+                Photo::create([
+                    'bid_id' => $this->id,
+                    'filename' => $filename
+                  ]);
+
+                Storage::disk('public')->put($this->getStorageDirectory() . '/' . $filename, Image::make($photo)->stream()->__toString());
+            });
+
+            $index++;
+        }
+    }
 }
