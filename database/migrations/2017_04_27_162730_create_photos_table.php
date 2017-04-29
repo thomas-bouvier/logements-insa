@@ -18,6 +18,7 @@ class CreatePhotosTable extends Migration
             $table->integer('bid_id')->unsigned();
             $table->foreign('bid_id')->references('id')->on('bids')->onDelete('cascade');
             $table->string('filename');
+            $table->string('format');
             $table->timestamps();
         });
     }

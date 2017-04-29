@@ -24,24 +24,24 @@ class UploadController extends Controller
           'large' => [940, 530]
         ];
 
-        $random_string = $this->random_string(32);
-
         foreach ($formats as $format => $dimensions)
         {
-            $filename = $random_string . '_' . $format . '.' . $photo->getClientOriginalExtension();
+            $filename = $this->random_string(32) . '.' . $photo->getClientOriginalExtension();
 
             Photo::create([
                 'bid_id' => $bid_id,
+                'format' => $format,
                 'filename' => $filename
               ]);
 
             Storage::disk('public')->put($this->getStorageDirectory($bid_id) . '/' . $filename, Image::make($photo)->fit($dimensions[0], $dimensions[1])->stream()->__toString());
         }
 
-        $filename = $random_string . '_original.' . $photo->getClientOriginalExtension();
+        $filename = $this->random_string(32) . '.' . $photo->getClientOriginalExtension();
 
         Photo::create([
             'bid_id' => $bid_id,
+            'format' => 'original',
             'filename' => $filename
         ]);
 
