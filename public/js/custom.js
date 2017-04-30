@@ -49,7 +49,10 @@ $(document).ready(function() {
   $("#lightgallery").lightGallery({
 
   });
-  $("#lightgallery").justifiedGallery();
+  $("#lightgallery").justifiedGallery({
+    captions: false,
+    margins: 3
+  });
   $("#my-dropzone").dropzone({
     url: "/upload"
   });
