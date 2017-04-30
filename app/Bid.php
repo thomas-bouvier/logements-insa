@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Intervention\Image\ImageManagerStatic as Image;
 use Storage;
+use App\Photo;
+use Illuminate\Support\Facades\DB;
 
 class Bid extends Model
 {
@@ -21,9 +23,27 @@ class Bid extends Model
     {
         parent::boot();
 
-        static::deleted(function($instance)
+        static::deleting(function($instance)
         {
-            $instance->detachPhotos();
+            $photos = Photo::where('bid_id', $instance->id)->get();
+
+            foreach ($photos as $photo)
+            {
+                $filename = $photo->filename;
+
+                foreach ($instance->formats as $format => $dimensions)
+                {
+                    $filename = preg_replace('/(.*_)(.*)(\..*)/', "$1$format$3", $filename);
+
+                    Storage::disk('public')->delete($instance->getStorageDirectory($instance->id) . '/' . $filename);
+                    Photo::where('filename', $filename)->where('bid_id', $instance->id)->delete();
+                }
+
+                $filename = preg_replace('/(.*_)(.*)(\..*)/', "$1original$3", $filename);
+
+                Storage::disk('public')->delete($instance->getStorageDirectory($instance->id) . '/' . $filename);
+                Photo::where('filename', $filename)->where('bid_id', $instance->id)->delete();
+            }
 
             return true;
         });

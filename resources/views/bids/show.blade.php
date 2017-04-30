@@ -1,5 +1,12 @@
 @extends('layouts.front')
 
+@section('head')
+
+<link href="{{ asset('css/lightgallery.min.css') }}" rel="stylesheet">
+<link href="{{ asset('css/justifiedGallery.min.css') }}" rel="stylesheet">
+
+@endsection
+
 @section('content')
 
 <div class="container">
@@ -65,5 +72,13 @@
     {!! nl2br($bid->description); !!}
   </p>
 </div>
+
+@endsection
+
+@section('js')
+
+<script src="{{ asset('js/lightgallery.min.js') }}"></script>
+<script src="{{ asset('js/jquery.justifiedGallery.min.js') }}"></script>
+<script src="{{ asset('js/custom_gallery.js') }}"></script>
 
 @endsection

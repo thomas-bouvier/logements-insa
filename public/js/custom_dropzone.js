@@ -46,13 +46,6 @@ Dropzone.options.myDropzone = {
 };
 
 $(document).ready(function() {
-  $("#lightgallery").lightGallery({
-
-  });
-  $("#lightgallery").justifiedGallery({
-    captions: false,
-    margins: 3
-  });
   $("#my-dropzone").dropzone({
     url: "/upload"
   });
