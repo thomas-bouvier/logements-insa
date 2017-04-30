@@ -62,7 +62,7 @@
 
       <div class="form-group">
         <button type="submit" class="btn btn-primary">
-          @if ($action == 'store')
+          @if ($bid->name == null)
             Envoyer
           @else
             Mettre à jour

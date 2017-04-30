@@ -23,7 +23,7 @@ class BidController extends Controller
     {
         $user_id = User::where('login', cas()->user())->first()->id;
 
-        $bids = Bid::where('user_id', $user_id)->get();
+        $bids = Bid::notDraft()->where('user_id', $user_id)->get();
         $bids->load('type');
 
         return view('bids.index', compact('bids'));
@@ -65,8 +65,7 @@ class BidController extends Controller
     {
         $data = $request->all();
         $data['user_id'] = User::where('login', cas()->user())->first()->id;
-        $data['photo_count'] = count(Photo::where('bid_id', $bid->id)->where('format', 'original')->get());
-
+        
         $bid->update($data);
 
         return redirect(action('BidController@index'))->with('success', "Votre annonce a bien été mise à jour.");

@@ -39,19 +39,6 @@ class Bid extends Model
         return $this->belongsTo('App\Type');
     }
 
-    public function detachPhotos()
-    {
-        for ($i = 1; $i <= $this->photo_count; $i++)
-        {
-            Storage::disk('public')->delete($this->getStorageDirectory() . '/' . $this->id . '_' . $i . '.jpg');
-
-            foreach ($this->formats as $format => $dimensions)
-            {
-                Storage::disk('public')->delete($this->getStorageDirectory() . '/' . $this->id . '_' . $i . '_' . $format . '.jpg');
-            }
-        }
-    }
-
     public function photo($format, $number)
     {
         $filenames = Photo::where('bid_id', $this->id)->where('format', $format)->get()[$number - 1]['filename'];

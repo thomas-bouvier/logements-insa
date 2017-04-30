@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\DB;
 
 use App\Bid;
 use App\Photo;
@@ -13,6 +14,11 @@ use File;
 
 class UploadController extends Controller
 {
+    public $formats = [
+      'thumb' => [360, 200],
+      'large' => [940, 530]
+    ];
+
     public function upload()
     {
         $input = Input::all();
@@ -20,14 +26,11 @@ class UploadController extends Controller
         $photo = $input['file'];
         $bid_id = $input['id'];
 
-        $formats = [
-          'thumb' => [360, 200],
-          'large' => [940, 530]
-        ];
+        $random_string = $this->random_string(32);
 
-        foreach ($formats as $format => $dimensions)
+        foreach ($this->formats as $format => $dimensions)
         {
-            $filename = $this->random_string(32) . '.' . $photo->getClientOriginalExtension();
+            $filename = $random_string . '_' . $format . '.' . $photo->getClientOriginalExtension();
 
             Photo::create([
                 'bid_id' => $bid_id,
@@ -38,7 +41,7 @@ class UploadController extends Controller
             Storage::disk('public')->put($this->getStorageDirectory($bid_id) . '/' . $filename, Image::make($photo)->fit($dimensions[0], $dimensions[1])->stream()->__toString());
         }
 
-        $filename = $this->random_string(32) . '.' . $photo->getClientOriginalExtension();
+        $filename = $random_string . '_original.' . $photo->getClientOriginalExtension();
 
         Photo::create([
             'bid_id' => $bid_id,
@@ -47,6 +50,29 @@ class UploadController extends Controller
         ]);
 
         Storage::disk('public')->put($this->getStorageDirectory($bid_id) . '/' . $filename, Image::make($photo)->stream()->__toString());
+
+        DB::table('bids')->increment('photo_count');
+    }
+
+    public function delete()
+    {
+        $bid_id = Input::get('id');
+        $filename = Input::get('filename');
+
+        foreach ($this->formats as $format => $dimensions)
+        {
+            $filename = preg_replace('/(.*_)(.*)(\..*)/', "$1$format$3", $filename);
+
+            Storage::disk('public')->delete($this->getStorageDirectory($bid_id) . '/' . $filename);
+            Photo::where('filename', $filename)->where('bid_id', $bid_id)->delete();
+        }
+
+        $filename = preg_replace('/(.*_)(.*)(\..*)/', "$1original$3", $filename);
+
+        Storage::disk('public')->delete($this->getStorageDirectory($bid_id) . '/' . $filename);
+        Photo::where('filename', $filename)->where('bid_id', $bid_id)->delete();
+
+        DB::table('bids')->decrement('photo_count');
     }
 
     public function getServerPhotos($bid_id)

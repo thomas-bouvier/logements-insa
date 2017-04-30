@@ -8,7 +8,8 @@ Dropzone.options.myDropzone = {
     maxFilesize: 5, // MB
     parallelUploads: 2, //limits number of files processed to reduce stress on server
     addRemoveLinks: true,
-    dictDefaultMessage: "Dépose tes photos ici :)",
+    dictDefaultMessage: 'Dépose tes photos ici :)',
+    dictRemoveFile: 'Supprimer',
     accept: function(file, done) {
         // TODO: Image upload validation
         done();
@@ -34,7 +35,12 @@ Dropzone.options.myDropzone = {
 
         });
         this.on("removedfile", function(file) {
-
+          $.ajax({
+            type: 'POST',
+            url: '/upload/delete',
+            data: {id: upload.dataset.id, filename: file.name, _token: $('[name=_token').val()},
+            dataType: 'html'
+          })
         });
     }
 };

@@ -15,8 +15,8 @@ Route::group(['middleware' => ['cas.auth', 'register']], function() {
 
   Route::get('/', 'PagesController@home');
 
-  Route::post('/upload', 'UploadController@upload');
-  Route::get('/upload', 'UploadController@upload');
+  Route::post('upload', 'UploadController@upload');
+  Route::post('upload/delete', 'UploadController@delete');
 
   Route::get('server-photos/{id}', ['uses' => 'UploadController@getServerPhotos']);
 
