@@ -24,40 +24,45 @@
 
   <div class="clearfix"></div>
 
-  <div id="lightgallery">
-    @for ($i = 1; $i <= $bid->photo_count; $i++)
-      <a href="{{ $bid->photo('original', $i) }}">
-        <img src="{{ $bid->photo('thumb', $i) }}" class="img-responsive" alt="{{ $bid->name }}">
-      </a>
-    @endfor
+  <div class="row">
+    <div class="col-md-9">
+      <div id="lightgallery">
+          @for ($i = 1; $i <= $bid->photo_count; $i++)
+              <a href="{{ $bid->photo('original', $i) }}">
+                <img src="{{ $bid->photo('thumb', $i) }}" class="img-responsive" alt="{{ $bid->name }}">
+              </a>
+          @endfor
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <h5 class="bid-details-title">Caractéristiques</h5>
+      <p class="bid-details">
+        <ul>
+          <li>
+            Type de bien : {{ $bid->type->name }}
+          </li>
+
+          <li>
+            Montant du loyer : {{ $bid->rental }} €
+          </li>
+
+          <li>
+            Surface : environ {{ $bid->ground }} m<sup>2</sup>
+          </li>
+
+          <li>
+            Localisation : {{ $bid->district }}
+          </li>
+        </ul>
+      </div>
+    </p>
   </div>
 
   <h5 class="bid-description-title">Description</h5>
 
   <p class="bid-description">
     {!! nl2br($bid->description); !!}
-  </p>
-
-  <h5 class="bid-details-title">Caractéristiques</h5>
-
-  <p class="bid-details">
-    <ul>
-      <li>
-        Type de bien : {{ $bid->type->name }}
-      </li>
-
-      <li>
-        Montant du loyer : {{ $bid->rental }} €
-      </li>
-
-      <li>
-        Surface : environ {{ $bid->ground }} m<sup>2</sup>
-      </li>
-
-      <li>
-        Localisation : {{ $bid->district }}
-      </li>
-    </div>
   </p>
 </div>
 

@@ -15,6 +15,7 @@
     <link href="{{ asset('css/lightgallery.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dropzone.css?version=1') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/justifiedGallery.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -100,6 +101,7 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/laravel.js') }}"></script>
     <script src="{{ asset('js/lightgallery.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.justifiedGallery.js') }}"></script>
     <script src="{{ asset('js/dropzone.js') }}"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
 </body>
