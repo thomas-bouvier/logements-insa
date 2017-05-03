@@ -26,7 +26,6 @@ class UploadController extends Controller
         $photo = $input['file'];
         $bid_id = $input['id'];
 
-        /*
         $random_string = $this->random_string(32);
 
         foreach ($this->formats as $format => $dimensions)
@@ -39,9 +38,10 @@ class UploadController extends Controller
                 'filename' => $filename
               ]);
 
-            Storage::disk('public')->put($this->getStorageDirectory($bid_id) . '/' . $filename, Image::make($photo)->fit($dimensions[0], $dimensions[1])->stream()->__toString());
+            //Storage::disk('public')->put($this->getStorageDirectory($bid_id) . '/' . $filename, Image::make($photo)->fit($dimensions[0], $dimensions[1])->stream()->__toString());
         }
 
+        /*
         $filename = $random_string . '_original.' . $photo->getClientOriginalExtension();
 
         Photo::create([
