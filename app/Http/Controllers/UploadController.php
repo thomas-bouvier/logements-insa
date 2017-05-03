@@ -21,6 +21,7 @@ class UploadController extends Controller
 
     public function upload()
     {
+        /*
         $input = Input::all();
 
         $photo = $input['file'];
@@ -52,6 +53,7 @@ class UploadController extends Controller
         Storage::disk('public')->put($this->getStorageDirectory($bid_id) . '/' . $filename, Image::make($photo)->stream()->__toString());
 
         DB::table('bids')->increment('photo_count');
+        */
     }
 
     public function delete()
