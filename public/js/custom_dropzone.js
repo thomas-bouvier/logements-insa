@@ -18,6 +18,8 @@ Dropzone.options.myDropzone = {
         // Pass token. You can use the same method to pass any other values as well such as a id to associate the image with for example.
         formData.append("_token", $('[name=_token').val()); // Laravel expect the token post value to be named _token by default
         formData.append("id", upload.dataset.id);
+        var err = eval("(" + xhr.responseText + ")");
+        alert(err.Message);
     },
     init: function() {
 
