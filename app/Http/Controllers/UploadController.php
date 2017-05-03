@@ -21,12 +21,12 @@ class UploadController extends Controller
 
     public function upload()
     {
-        /*
         $input = Input::all();
 
         $photo = $input['file'];
         $bid_id = $input['id'];
 
+        /*
         $random_string = $this->random_string(32);
 
         foreach ($this->formats as $format => $dimensions)
