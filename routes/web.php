@@ -23,7 +23,7 @@ Route::group(['middleware' => ['cas.auth', 'register']], function() {
   Route::resource('types', 'TypeController');
   Route::resource('bids', 'BidController');
 
-  Route::get('logout', function() {
+  Route::get('/cas/logout', function() {
     cas()->logout();
   });
 });

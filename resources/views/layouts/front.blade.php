@@ -73,7 +73,7 @@
                               <li class="divider"></li>
 
                               <li>
-                                  <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                  <a href="{{ route('cas/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                       Se déconnecter
                                   </a>
 
