@@ -13,9 +13,34 @@
         @endif
       </div>
 
-      <p class="text-center">
-        <img src="{{ $bid->photo('large', 1) }}" class="img-responsive" alt="{{ $bid->name }}">
-      </p>
+      <div class="row" style="margin-bottom: 15px;">
+        <div class="col-md-9">
+          <img src="{{ $bid->photo('large', 1) }}" class="img-responsive" alt="{{ $bid->name }}">
+        </div>
+
+        <div class="col-md-3">
+          <h5 class="bid-details-title">Caractéristiques</h5>
+          <p class="bid-details">
+            <ul>
+              <li>
+                Type de bien : {{ $bid->type->name }}
+              </li>
+
+              <li>
+                Montant du loyer : {{ $bid->rental }} €
+              </li>
+
+              <li>
+                Surface : environ {{ $bid->ground }} m<sup>2</sup>
+              </li>
+
+              <li>
+                Localisation : {{ $bid->district }}
+              </li>
+            </ul>
+          </div>
+        </p>
+      </div>
 
       <a class="btn btn-primary" href="{{ action('BidController@show', $bid) }}">Voir</a>
       @if (App\User::where('login', cas()->user())->first()->id == $bid->user_id)
