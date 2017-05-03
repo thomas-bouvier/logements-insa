@@ -38,7 +38,7 @@ class UploadController extends Controller
                 'filename' => $filename
               ]);
 
-            //Storage::disk('public')->put($this->getStorageDirectory($bid_id) . '/' . $filename, Image::make($photo)->fit($dimensions[0], $dimensions[1])->stream()->__toString());
+            Storage::disk('public')->put($this->getStorageDirectory($bid_id) . '/' . $filename, Image::make($photo)->fit($dimensions[0], $dimensions[1])->stream()->__toString());
         }
 
         /*
