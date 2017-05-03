@@ -41,7 +41,6 @@ class UploadController extends Controller
             Storage::disk('public')->put($this->getStorageDirectory($bid_id) . '/' . $filename, Image::make($photo)->fit($dimensions[0], $dimensions[1])->stream()->__toString());
         }
 
-        /*
         $filename = $random_string . '_original.' . $photo->getClientOriginalExtension();
 
         Photo::create([
@@ -53,7 +52,6 @@ class UploadController extends Controller
         Storage::disk('public')->put($this->getStorageDirectory($bid_id) . '/' . $filename, Image::make($photo)->stream()->__toString());
 
         DB::table('bids')->increment('photo_count');
-        */
     }
 
     public function delete()
