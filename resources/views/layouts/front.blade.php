@@ -39,7 +39,10 @@
 
                   <!-- Branding Image -->
                   <a class="navbar-brand" href="{{ url('/') }}">
-                      {{ config('app.name', 'Logements INSA') }}
+                      <div class="navbar-brand-name">
+                          <img src="{{ asset('img/aeir.png') }}"/>
+                          {{ config('app.name', 'Logements INSA') }}
+                      </div>
                   </a>
               </div>
 

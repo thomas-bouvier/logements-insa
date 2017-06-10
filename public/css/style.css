@@ -34,3 +34,16 @@ h5.bid-description-title {
 h5.bid-details-title {
   margin-top: 35px !important;
 }
+
+.navbar-brand-name > {
+  display: inline-block;
+  float: left;
+}
+
+.navbar-brand-name > img {
+  display: inline-block;
+  float: left;
+  margin-top: -14px;
+  margin-right: 10px;
+  max-width: 35px;
+}
