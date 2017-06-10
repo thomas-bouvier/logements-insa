@@ -31,6 +31,7 @@ class BidRequest extends FormRequest
             'rental' => "required|numeric",
             'type_id' => "required|exists:types,id",
             'email' => "required|email",
+            'filecustom' => "blabla"
         ];
 
         return $rules;

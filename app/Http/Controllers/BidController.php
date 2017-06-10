@@ -48,7 +48,6 @@ class BidController extends Controller
     public function store(BidRequest $request)
     {
         $data = $request->all();
-
         $data['user_id'] = User::where('login', cas()->user())->first()->id;
 
         Bid::create($data);
@@ -65,7 +64,7 @@ class BidController extends Controller
     {
         $data = $request->all();
         $data['user_id'] = User::where('login', cas()->user())->first()->id;
-        
+
         $bid->update($data);
 
         return redirect(action('BidController@index'))->with('success', "Votre annonce a bien été mise à jour.");

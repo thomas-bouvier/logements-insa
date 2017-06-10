@@ -6,6 +6,11 @@ use Intervention\Image\ImageManagerStatic as Image;
 
 class Validator extends \Illuminate\Validation\Validator
 {
+    public function validateCustom($attribute, $value, $parameters)
+    {
+        return false;
+    }
+
     public function validateDimension($attribute, $value, $parameters)
     {
         $image = Image::make($value);

@@ -43,6 +43,7 @@
     </div>
 
     <div class="col-md-3">
+      <p>Annonce publiée le {{ $bid->created_at->formatLocalized('%d %B %Y') }} ({{ $bid->created_at->diffForHumans() }}).</p>
       <h5 class="bid-details-title">Caractéristiques</h5>
       <p class="bid-details">
         <ul>

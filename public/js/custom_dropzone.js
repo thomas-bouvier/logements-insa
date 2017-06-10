@@ -5,6 +5,7 @@ Dropzone.autoDiscover = false;
 
 // imageUpload portion is the camelized version of our HTML elements ID.
 Dropzone.options.myDropzone = {
+    paramName: "filecustom",
     maxFilesize: 5, // MB
     parallelUploads: 2, //limits number of files processed to reduce stress on server
     addRemoveLinks: true,
