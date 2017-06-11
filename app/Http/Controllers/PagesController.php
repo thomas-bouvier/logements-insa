@@ -8,6 +8,11 @@ use App\Bid;
 
 class PagesController extends Controller
 {
+    public function welcome()
+    {
+        return view('pages.welcome');
+    }
+
     public function home()
     {
         $bids = Bid::notDraft()->latest()->limit(10)->paginate(10);

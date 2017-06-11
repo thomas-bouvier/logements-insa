@@ -12,7 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/bootswatch.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css?version=11') }}" rel="stylesheet">
 
     @yield('head')
 
@@ -63,24 +63,32 @@
                           <ul class="dropdown-menu" role="menu">
                             @if (App\User::where('login', cas()->user())->first()->role == 'admin')
                               <li>
-                                <a href="{{ url('/types') }}">Gérer les types de bien</a>
+                                <a href="{{ url('types') }}">Gérer les types de bien</a>
                               </li>
 
                               <li class="divider"></li>
                             @endif
 
                               <li>
-                                <a href="{{ url('/bids') }}">Gérer mes annonces</a>
+                                <a href="{{ url('home') }}">Consulter les annonces</a>
+                              </li>
+
+                              <li>
+                                <a href="{{ url('bids') }}">Gérer mes annonces</a>
                               </li>
 
                               <li class="divider"></li>
 
                               <li>
-                                  <a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <a href="">À propos</a>
+                              </li>
+
+                              <li>
+                                  <a href="{{ url('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                       Se déconnecter
                                   </a>
 
-                                  <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                  <form id="logout-form" action="{{ url('logout') }}" method="POST" style="display: none;">
                                       {{ csrf_field() }}
                                   </form>
                               </li>
@@ -97,12 +105,6 @@
 
       @yield('content')
     </div>
-
-    <footer class="footer">
-      <div class="container">
-        <p>Pour toute suggestion/rapport de bug n'hésite pas à m'envoyer un message à <a href="mailto:tbouvier@insa-rennes.fr">tbouvier@insa-rennes.fr</a> :)</p>
-      </div>
-    </footer>
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
