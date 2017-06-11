@@ -15,6 +15,7 @@ Route::group(['middleware' => ['cas.auth', 'register']], function() {
 
   Route::get('/', 'PagesController@welcome');
   Route::get('home', 'PagesController@home');
+  Route::get('about', 'PagesController@about');
 
   Route::post('upload', 'UploadController@upload');
   Route::post('upload/delete', 'UploadController@delete');

@@ -19,4 +19,9 @@ class PagesController extends Controller
 
         return view('pages.home', compact('bids'));
     }
+
+    public function about()
+    {
+        return view('pages.about');
+    }
 }

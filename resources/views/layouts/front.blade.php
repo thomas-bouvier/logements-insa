@@ -80,7 +80,7 @@
                               <li class="divider"></li>
 
                               <li>
-                                <a href="">À propos</a>
+                                <a href="{{ url('about') }}">À propos</a>
                               </li>
 
                               <li>
