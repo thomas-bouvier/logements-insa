@@ -79,6 +79,7 @@
 @section('js')
 
 <script src="{{ asset('js/lightgallery.min.js') }}"></script>
+<script src="{{ asset('js/lg-zoom.min.js') }}"></script>
 <script src="{{ asset('js/jquery.justifiedGallery.min.js') }}"></script>
 <script src="{{ asset('js/custom_gallery.js') }}"></script>
 
