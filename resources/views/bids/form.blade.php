@@ -52,6 +52,8 @@
 
       <div class="form-group">
         <label class="control-label">Photos</label>
+        <div class="dz-message"></div>
+
         <div data-id="{{ $bid->id }}" class="dropzone dropzone-previews" id="my-dropzone"></div>
       </div>
 

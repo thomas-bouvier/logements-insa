@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Photo;
 
 class BidRequest extends FormRequest
 {
@@ -30,10 +31,31 @@ class BidRequest extends FormRequest
             'ground' => "required|numeric",
             'rental' => "required|numeric",
             'type_id' => "required|exists:types,id",
-            'email' => "required|email",
-            'filecustom' => "blabla"
+            'email' => "required|email"
         ];
 
         return $rules;
+    }
+
+    public function validator($factory)
+    {
+        $validator = $factory->make(
+            $this->all(), $this->container->call([$this, 'rules']), $this->messages(), $this->attributes()
+        );
+
+        $validator->after(function($validator)
+        {
+            if ($this->noPhoto())
+            {
+                $validator->errors()->add('file', 'L\'annonce doit comporter au moins une photo.');
+            }
+        });
+
+        return $validator;
+    }
+
+    private function noPhoto()
+    {
+        return Photo::where('bid_id', $this->segment(2))->count() == 0;
     }
 }

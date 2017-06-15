@@ -47,6 +47,10 @@ body {
   margin-bottom: 10px !important;
 }
 
+.bid-description {
+  word-wrap: break-word;
+}
+
 h5.bid-description-title {
   margin-top: 45px !important;
 }

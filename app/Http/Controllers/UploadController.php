@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Response;
 
 use App\Bid;
 use App\Photo;
@@ -19,9 +21,22 @@ class UploadController extends Controller
       'large' => [940, 530]
     ];
 
-    public function upload()
+    public function upload(Request $request)
     {
         $input = Input::all();
+
+        /*
+        $validator = Validator::make($input, Photo::$rules, Photo::$messages);
+
+        if ($validator->fails()) {
+
+            return Response::json([
+                'error' => true,
+                'message' => $validator->messages()->first(),
+                'code' => 400
+            ], 400);
+        }
+        */
 
         $photo = $input['file'];
         $bid_id = $input['id'];
