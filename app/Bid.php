@@ -4,12 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Intervention\Image\ImageManagerStatic as Image;
+use Hootlex\Moderation\Moderatable;
 use Storage;
 use App\Photo;
 use Illuminate\Support\Facades\DB;
 
 class Bid extends Model
 {
+    use Moderatable;
+
     public $guarded = ['id'];
 
     public $dates = ['created_at', 'updated_at'];

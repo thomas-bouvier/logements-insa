@@ -196,6 +196,11 @@ return [
          * InterventionImage
          */
         Intervention\Image\ImageServiceProvider::class,
+
+        /*
+        * laravel-moderation
+        */
+        Hootlex\Moderation\ModerationServiceProvider::class,
     ],
 
     /*

@@ -26,7 +26,7 @@ class AddPhotoCountToBid extends Migration
     public function down()
     {
         Schema::table('bids', function (Blueprint $table) {
-            //
+            $table->dropColumn('photo_count');
         });
     }
 }

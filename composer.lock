@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fafaa69fdf542d553d61ccadc05e5d55",
-    "content-hash": "af38e8e874740401ca210101fd646cc3",
+    "hash": "0bcb1e57aba4b3520bc17815cc7b5a31",
+    "content-hash": "eebcd0aef29e5c6a648599cf5117ed24",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -670,6 +670,52 @@
                 "url"
             ],
             "time": "2017-03-20 17:10:46"
+        },
+        {
+            "name": "hootlex/laravel-moderation",
+            "version": "v1.0.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hootlex/laravel-moderation.git",
+                "reference": "f6538a01658b24f7e1b1b9bd4a5e1a09604cd4e0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hootlex/laravel-moderation/zipball/f6538a01658b24f7e1b1b9bd4a5e1a09604cd4e0",
+                "reference": "f6538a01658b24f7e1b1b9bd4a5e1a09604cd4e0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "laravel/laravel": "5.*",
+                "phpunit/phpunit": "5.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Hootlex\\Moderation\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alex Kyriakidis",
+                    "email": "hootlex@icloud.com"
+                }
+            ],
+            "description": "A simple Content Moderation System for Laravel 5.* that allows you to Approve or Reject resources like posts, comments, users, etc.",
+            "keywords": [
+                "content-moderation",
+                "laravel",
+                "moderation",
+                "moderation-system"
+            ],
+            "time": "2017-05-29 18:11:57"
         },
         {
             "name": "intervention/image",

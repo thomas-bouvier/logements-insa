@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddEmailToBid extends Migration
+class AddModerationColumnsToBid extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class AddEmailToBid extends Migration
      */
     public function up()
     {
-        Schema::table('bids', function (Blueprint $table) {
-            $table->string('email');
+        Schema::table('bids', function(Blueprint $table) {
+            $table->smallInteger('status')->default(0);
+            $table->dateTime('moderated_at')->nullable();
         });
     }
 
@@ -25,8 +26,7 @@ class AddEmailToBid extends Migration
      */
     public function down()
     {
-        Schema::table('bids', function (Blueprint $table) {
-            $table->dropColumn('email');
-        });
+        $table->dropColumn('status');
+        $table->dropColumn('moderated_at');
     }
 }
