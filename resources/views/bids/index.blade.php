@@ -28,13 +28,13 @@
         <td>{{ $bid->type->name }}</td>
         <td>
             @if ($bid->isPending())
-                <span class="label label-warning">En attente de modération</span>
+                <span class="label label-info">En attente de modération</span>
             @elseif ($bid->isApproved())
                 <span class="label label-success">Modérée, validée</span>
             @elseif ($bid->isRejected())
                 <span class="label label-danger">Modérée, rejetée</span>
             @elseif ($bid->isPostponed())
-                <span class="label label-danger">Modérée, rejetée</span>
+                <span class="label label-warning">Modérée, mise en attente</span>
             @endif
         </td>
         <td>

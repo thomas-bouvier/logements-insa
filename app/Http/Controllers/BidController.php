@@ -36,7 +36,11 @@ class BidController extends Controller
 
         if ($bid->isPending())
         {
-            Session::flash('warning', 'Cette annonce n\'a pas encore été modérée et n\'est donc pas encore visible des autres utilisareurs.');
+            Session::flash('warning', 'Cette annonce n\'a pas encore été modérée et n\'est donc pas visible des autres utilisateurs.');
+        }
+        else if ($bid->isPostponed())
+        {
+            Session::flash('warning', 'Cette annonce a été mise en attente et n\'est donc pas visible des autres utilisateurs. Corrigez-là pour qu\'elle soit de nouveau modérée.');
         }
 
         return view('bids.show', compact('bid'));
