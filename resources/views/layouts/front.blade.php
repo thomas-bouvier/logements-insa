@@ -63,11 +63,11 @@
                           <ul class="dropdown-menu" role="menu">
                             @if (App\User::where('login', cas()->user())->first()->role == 'admin')
                             <li>
-                                <a href="{{ url('admin/bids') }}">Modérer les annonces</a>
+                                <a href="{{ route('admin.bids.index') }}">Modérer les annonces</a>
                             </li>
 
                             <li>
-                                <a href="{{ route('types.index') }}">Gérer les types de bien</a>
+                                <a href="{{ route('admin.types.index') }}">Gérer les types de bien</a>
                             </li>
 
                               <li class="divider"></li>
@@ -78,7 +78,7 @@
                               </li>
 
                               <li>
-                                <a href="{{ url('bids') }}">Gérer mes annonces</a>
+                                <a href="{{ route('bids.index') }}">Gérer mes annonces</a>
                               </li>
 
                               <li class="divider"></li>

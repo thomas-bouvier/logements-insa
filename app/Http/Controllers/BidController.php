@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Session;
 use App\Http\Requests\BidRequest;
 use App\Bid;
 use App\User;
@@ -33,6 +34,11 @@ class BidController extends Controller
     {
         $bid = Bid::findOrFail($id);
 
+        if ($bid->isPending())
+        {
+            Session::flash('warning', 'Cette annonce n\'a pas encore été modérée et n\'est donc pas encore visible des autres utilisareurs.');
+        }
+
         return view('bids.show', compact('bid'));
     }
 
@@ -52,7 +58,7 @@ class BidController extends Controller
 
         Bid::create($data);
 
-        return redirect(action('BidController@index'))->with('success', "Votre annonce a bien été créée.");
+        return redirect(route('bids.index'))->with('success', "Votre annonce a bien été créée. Elle est maintenant en cours de modération, et sera bientôt en ligne.");
     }
 
     public function edit($bid)
@@ -67,13 +73,13 @@ class BidController extends Controller
 
         $bid->update($data);
 
-        return redirect(action('BidController@index'))->with('success', "Votre annonce a bien été mise à jour.");
+        return redirect(route('bids.index'))->with('success', "Votre annonce a bien été mise à jour.");
     }
 
     public function destroy($bid)
     {
         $bid->delete();
 
-        return redirect(action('BidController@index'))->with('success', "Votre annonce a bien été supprimée.");
+        return redirect(route('bids.index'))->with('success', "Votre annonce a bien été supprimée.");
     }
 }

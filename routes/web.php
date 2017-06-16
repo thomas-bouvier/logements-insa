@@ -26,8 +26,8 @@ Route::group(['middleware' => ['cas.auth', 'register']], function() {
 
     Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function()
     {
-        Route::resource('types', 'TypeController');
-        Route::resource('bids', 'BidController');
+        Route::resource('types', 'TypeController', ['as' => 'admin']);
+        Route::resource('bids', 'BidController', ['as' => 'admin']);
     });
 
     Route::post('logout', function() {

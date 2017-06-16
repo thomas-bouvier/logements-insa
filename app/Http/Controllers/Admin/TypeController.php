@@ -31,7 +31,7 @@ class TypeController extends Controller
     {
         Type::create($request->only('name', 'slug'));
 
-        return redirect(action('TypeController@index'))->with('success', "La catégorie a bien été créée.");
+        return redirect(route('types.index'))->with('success', "La catégorie a bien été créée.");
     }
 
     public function edit($id)
@@ -46,7 +46,7 @@ class TypeController extends Controller
         $type = Type::findOrFail($id);
         $type->update($request->only('name', 'slug'));
 
-        return redirect(action('TypeController@index'))->with('success', "La catégorie a bien été mise à jour.");
+        return redirect(route('types.index'))->with('success', "La catégorie a bien été mise à jour.");
     }
 
     public function destroy($id)
@@ -54,6 +54,6 @@ class TypeController extends Controller
         $type = Type::findOrFail($id);
         $type->delete();
 
-        return redirect(action('TypeController@index'))->with('success', "La catégorie a bien été supprimée.");
+        return redirect(route('types.index'))->with('success', "La catégorie a bien été supprimée.");
     }
 }

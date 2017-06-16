@@ -33,5 +33,5 @@ return array(
     | only approved resources.
     | In other case, all resources except Rejected ones, will returned as well.
     */
-    'strict' => true,
+    'strict' => false,
 );
