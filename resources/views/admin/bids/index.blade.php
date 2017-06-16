@@ -77,7 +77,7 @@
         <tbody>
             @foreach($approved_bids as $approved_bid)
             <tr>
-                <td>{{ App\User::where('id', $pending_bid->user_id)->first()->login }} <a class="btn btn-default" href="mailto:{{ App\User::where('id', $approved_bid->user_id)->first()->login }}@insa-rennes.fr">Contacter</a></td>
+                <td>{{ App\User::where('id', $approved_bid->user_id)->first()->login }} <a class="btn btn-default" href="mailto:{{ App\User::where('id', $approved_bid->user_id)->first()->login }}@insa-rennes.fr">Contacter</a></td>
                 <td>{{ $approved_bid->name }}</td>
                 <td>
                     <a class="btn btn-primary" href="{{ route('bids.show', $approved_bid) }}">Voir</a>

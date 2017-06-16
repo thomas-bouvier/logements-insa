@@ -77,6 +77,13 @@ class BidController extends Controller
 
         $bid->update($data);
 
+        if ($bid->isPostponed())
+        {
+            $bid->markPending();
+
+            return redirect(route('bids.index'))->with('success', "Votre annonce a bien été mise à jour. Elle est maintenant en cours de modération, et sera bientôt en ligne.");
+        }
+
         return redirect(route('bids.index'))->with('success', "Votre annonce a bien été mise à jour.");
     }
 

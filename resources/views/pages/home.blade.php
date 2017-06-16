@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-    @if ($bids != null)
+    @if ($bids == null)
         <p>Il n'y a pas d'annonce pour le moment :(</p>
     @else
         @foreach ($bids as $bid)
