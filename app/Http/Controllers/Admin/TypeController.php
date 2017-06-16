@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\TypeRequest;
 use App\Type;
 
@@ -16,14 +17,14 @@ class TypeController extends Controller
     {
         $types = Type::all();
 
-        return view('types.index', compact('types'));
+        return view('admin.types.index', compact('types'));
     }
 
     public function create()
     {
         $type = new Type();
 
-        return view('types.create', compact('type'));
+        return view('admin.types.create', compact('type'));
     }
 
     public function store(TypeRequest $request)
@@ -37,7 +38,7 @@ class TypeController extends Controller
     {
         $type = Type::findOrFail($id);
 
-        return view('types.edit', compact('type'));
+        return view('admin.types.edit', compact('type'));
     }
 
     public function update($id, TypeRequest $request)

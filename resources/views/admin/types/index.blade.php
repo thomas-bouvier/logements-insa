@@ -8,7 +8,7 @@
   </div>
 
   <p class="pull-right">
-    <a class="btn btn-primary" href="{{ action('TypeController@create') }}">Ajouter un type de bien</a>
+    <a class="btn btn-primary" href="{{ route('types.create') }}">Ajouter un type de bien</a>
   </p>
 
   <table class="table table-striped">
@@ -28,8 +28,8 @@
         <td>{{ $type->name }}</td>
         <td>{{ $type->slug }}</td>
         <td>
-          <a class="btn btn-default" href="{{ action('TypeController@edit', $type) }}">Éditer</a>
-          <a class="btn btn-danger" href="{{ action('TypeController@destroy', $type) }}" data-method="delete" data-confirm="Voulez-vous vraiment supprimer le type de bien « {{ $type->name }} » ?">Supprimer</a>
+          <a class="btn btn-default" href="{{ route('types.edit', $type) }}">Éditer</a>
+          <a class="btn btn-danger" href="{{ route('types.destroy', $type) }}" data-method="delete" data-confirm="Voulez-vous vraiment supprimer le type de bien « {{ $type->name }} » ?">Supprimer</a>
         </td>
       </tr>
       @endforeach

@@ -13,19 +13,24 @@
 
 Route::group(['middleware' => ['cas.auth', 'register']], function() {
 
-  Route::get('/', 'PagesController@welcome');
-  Route::get('home', 'PagesController@home');
-  Route::get('about', 'PagesController@about');
+    Route::get('/', 'PagesController@welcome');
+    Route::get('home', 'PagesController@home');
+    Route::get('about', 'PagesController@about');
 
-  Route::post('upload', 'UploadController@upload');
-  Route::post('upload/delete', 'UploadController@delete');
+    Route::post('upload', 'UploadController@upload');
+    Route::post('upload/delete', 'UploadController@delete');
 
-  Route::get('server-photos/{id}', ['uses' => 'UploadController@getServerPhotos']);
+    Route::get('server-photos/{id}', ['uses' => 'UploadController@getServerPhotos']);
 
-  Route::resource('types', 'TypeController');
-  Route::resource('bids', 'BidController');
+    Route::resource('bids', 'BidController');
 
-  Route::post('logout', function() {
-    cas()->logout();
-  });
+    Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function()
+    {
+        Route::resource('types', 'TypeController');
+        Route::resource('bids', 'BidController');
+    });
+
+    Route::post('logout', function() {
+        cas()->logout();
+    });
 });

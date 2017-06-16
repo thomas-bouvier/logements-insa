@@ -62,9 +62,13 @@
 
                           <ul class="dropdown-menu" role="menu">
                             @if (App\User::where('login', cas()->user())->first()->role == 'admin')
-                              <li>
-                                <a href="{{ url('types') }}">Gérer les types de bien</a>
-                              </li>
+                            <li>
+                                <a href="{{ url('admin/bids') }}">Modérer les annonces</a>
+                            </li>
+
+                            <li>
+                                <a href="{{ route('types.index') }}">Gérer les types de bien</a>
+                            </li>
 
                               <li class="divider"></li>
                             @endif
