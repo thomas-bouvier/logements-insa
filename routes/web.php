@@ -27,6 +27,8 @@ Route::group(['middleware' => ['cas.auth', 'register']], function() {
     Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function()
     {
         Route::resource('types', 'TypeController', ['as' => 'admin']);
+
+        Route::get('bids/{bid}/approve', 'BidController@approve');
         Route::resource('bids', 'BidController', ['as' => 'admin']);
     });
 
