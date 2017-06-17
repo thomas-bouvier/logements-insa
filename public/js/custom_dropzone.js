@@ -40,12 +40,12 @@ Dropzone.options.myDropzone = {
         });
 
         this.on("removedfile", function(file) {
-          $.ajax({
-            type: 'POST',
-            url: '/upload/delete',
-            data: {id: upload.dataset.id, filename: file.name, _token: $('[name=_token').val()},
-            dataType: 'html'
-          })
+            $.ajax({
+                type: 'POST',
+                url: '/upload/delete',
+                data: {id: upload.dataset.id, filename: file.name, _token: $('[name=_token').val()},
+                dataType: 'html'
+            })
         });
     }
 };

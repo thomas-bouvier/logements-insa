@@ -96,8 +96,8 @@ class UploadController extends Controller
 
             $res[] = [
                 'filename' => $filename,
-                'size' => Storage::disk('public')->size($this->getStorageDirectory($bid_id) . '/' . $filename),
-                'server' => url(Storage::disk('public')->url($this->getStorageDirectory($bid_id) . '/' . $filename))
+                'size' => Storage::disk('public')->size($bid_id . '/original/' . $filename),
+                'server' => url(Storage::disk('public')->url($bid_id . '/thumb/' . $filename))
             ];
         }
 
