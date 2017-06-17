@@ -68,32 +68,57 @@ class UploadController extends Controller
     /*
     *
     */
-    public function delete()
+    public function delete(Request $request)
     {
         $bid_id = Input::get('id');
         $filename = Input::get('filename');
 
-        $directories = Storage::disk('public')->directories($bid_id);
-
-        foreach($directories as $directory)
+        if (!Bid::where('id', $bid_id)->exists())
         {
-            $files = Storage::disk('public')->files($directory);
-
-            foreach($files as $file)
+            if ($request->session()->has('temp_folder_name'))
             {
-                if (substr($file, strrpos($file, '/') + 1) == $filename)
-                {
-                    Photo::where('filename', $filename)->where('bid_id', $bid_id)->where('format', substr($directory, strrpos($directory, '/') + 1))->delete();
+                $path = 'temp/' . $request->session()->get('temp_folder_name');
 
-                    Storage::disk('public')->delete($file);
+                $directories = Storage::disk('public')->directories($path);
+
+                foreach ($directories as $directory)
+                {
+                    $files = Storage::disk('public')->files($directory);
+
+                    foreach ($files as $file)
+                    {
+                        if (strcmp(substr($file, strrpos($file, '/') + 1), $filename) == 0)
+                        {
+                            Storage::disk('public')->delete($file);
+                        }
+                    }
                 }
             }
         }
+        else
+        {
+            $directories = Storage::disk('public')->directories($bid_id);
 
-        $bid = Bid::findOrFail($bid_id);
+            foreach ($directories as $directory)
+            {
+                $files = Storage::disk('public')->files($directory);
 
-        $bid->photo_count = count(Storage::disk('public')->files($bid_id . '/original'));
-        $bid->save();
+                foreach ($files as $file)
+                {
+                    if (strcmp(substr($file, strrpos($file, '/') + 1), $filename) == 0)
+                    {
+                        Photo::where('filename', $filename)->where('bid_id', $bid_id)->where('format', substr($directory, strrpos($directory, '/') + 1))->delete();
+
+                        Storage::disk('public')->delete($file);
+                    }
+                }
+            }
+
+            $bid = Bid::findOrFail($bid_id);
+
+            $bid->photo_count = count(Storage::disk('public')->files($bid_id . '/original'));
+            $bid->save();
+        }
     }
 
     /*
@@ -111,13 +136,13 @@ class UploadController extends Controller
 
                 $directories = Storage::disk('public')->directories($path);
 
-                foreach($directories as $directory)
+                foreach ($directories as $directory)
                 {
                     if (strcmp(substr($directory, strrpos($directory, '/') + 1), 'original') == 0)
                     {
                         $files = Storage::disk('public')->files($directory);
 
-                        foreach($files as $file)
+                        foreach ($files as $file)
                         {
                             $filename = substr($file, strrpos($file, '/') + 1);
 
