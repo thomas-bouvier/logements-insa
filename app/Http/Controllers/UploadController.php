@@ -28,8 +28,8 @@ class UploadController extends Controller
         /*
         $validator = Validator::make($input, Photo::$rules, Photo::$messages);
 
-        if ($validator->fails()) {
-
+        if ($validator->fails())
+        {
             return Response::json([
                 'error' => true,
                 'message' => $validator->messages()->first(),
@@ -39,34 +39,26 @@ class UploadController extends Controller
         */
 
         $photo = $input['file'];
-        $bid_id = $input['id'];
 
-        $random_string = $this->random_string(32);
+        // Storing the temp folder name in the Session
+
+        $temp_folder_name = $request->session()->get('temp_folder_name', $this->random_string(32));
+
+        if (!$request->session()->has('temp_folder_name'))
+        {
+            $request->session()->put('temp_folder_name', $temp_folder_name);
+        }
+
+        // Generating a filename
+
+        $filename = $this->random_string(32) . '.' . $photo->getClientOriginalExtension();
 
         foreach ($this->formats as $format => $dimensions)
         {
-            $filename = $random_string . '_' . $format . '.' . $photo->getClientOriginalExtension();
-
-            Photo::create([
-                'bid_id' => $bid_id,
-                'format' => $format,
-                'filename' => $filename
-              ]);
-
-            Storage::disk('public')->put($this->getStorageDirectory($bid_id) . '/' . $filename, Image::make($photo)->fit($dimensions[0], $dimensions[1])->stream()->__toString());
+            Storage::disk('public')->put('temp/' . $temp_folder_name . '/' . $format . '/' . $filename, Image::make($photo)->fit($dimensions[0], $dimensions[1])->stream()->__toString());
         }
 
-        $filename = $random_string . '_original.' . $photo->getClientOriginalExtension();
-
-        Photo::create([
-            'bid_id' => $bid_id,
-            'format' => 'original',
-            'filename' => $filename
-        ]);
-
-        Storage::disk('public')->put($this->getStorageDirectory($bid_id) . '/' . $filename, Image::make($photo)->stream()->__toString());
-
-        DB::table('bids')->increment('photo_count');
+        Storage::disk('public')->put('temp/' . $temp_folder_name . '/original/' . $filename, Image::make($photo)->stream()->__toString());
     }
 
     public function delete()

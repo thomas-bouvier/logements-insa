@@ -37,6 +37,7 @@ class BidRequest extends FormRequest
         return $rules;
     }
 
+    /*
     public function validator($factory)
     {
         $validator = $factory->make(
@@ -53,6 +54,7 @@ class BidRequest extends FormRequest
 
         return $validator;
     }
+    */
 
     private function noPhoto()
     {

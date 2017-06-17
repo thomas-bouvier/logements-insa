@@ -2,7 +2,7 @@
 
 @section('head')
 
-<link href="{{ asset('css/dropzone.min.css') }}" rel="stylesheet">
+<link href="{{ asset('css/dropzone.css') }}" rel="stylesheet">
 
 @endsection
 

@@ -9,7 +9,7 @@ Dropzone.options.myDropzone = {
     maxFilesize: 5, // MB
     parallelUploads: 2, //limits number of files processed to reduce stress on server
     addRemoveLinks: true,
-    dictDefaultMessage: 'Dépose tes photos ici :)',
+    dictDefaultMessage: 'Dépose au moins une photo ici !',
     dictRemoveFile: 'Supprimer',
 
     accept: function(file, done) {
