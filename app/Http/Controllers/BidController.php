@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Session;
 use Storage;
+use Illuminate\Http\Request;
 use App\Http\Requests\BidRequest;
 use App\Bid;
 use App\User;
@@ -21,12 +22,17 @@ class BidController extends Controller
         return Bid::findOrFail($id);
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $user_id = User::where('login', cas()->user())->first()->id;
 
         $bids = Bid::where('user_id', $user_id)->get();
         $bids->load('type');
+
+        if ($request->session()->has('temp_folder_name'))
+        {
+            $request->session()->forget('temp_folder_name');
+        }
 
         return view('bids.index', compact('bids'));
     }

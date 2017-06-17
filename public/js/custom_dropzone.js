@@ -26,7 +26,7 @@ Dropzone.options.myDropzone = {
     init: function() {
         var myDropzone = this;
 
-        $.get('/server-photos/' + upload.dataset.id, function(data) {
+        $.get('/photos/' + upload.dataset.id, function(data) {
             $.each(data.photos, function (key, value) {
                 var file = {name: value.filename, size: value.size};
                 myDropzone.options.addedfile.call(myDropzone, file);

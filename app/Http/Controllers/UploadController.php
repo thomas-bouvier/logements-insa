@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -17,8 +18,8 @@ use File;
 class UploadController extends Controller
 {
     public $formats = [
-      'thumb' => [360, 200],
-      'large' => [940, 530]
+        'thumb' => [360, 200],
+        'large' => [940, 530]
     ];
 
     /*
@@ -45,7 +46,7 @@ class UploadController extends Controller
 
         // Storing the temp folder name in the Session
 
-        $temp_folder_name = $request->session()->get('temp_folder_name', $this->random_string(32));
+        $temp_folder_name = $request->session()->get('temp_folder_name', str_random(32));
 
         if (!$request->session()->has('temp_folder_name'))
         {
@@ -54,7 +55,7 @@ class UploadController extends Controller
 
         // Generating a filename
 
-        $filename = $this->random_string(32) . '.' . $photo->getClientOriginalExtension();
+        $filename = str_random(32) . '.' . $photo->getClientOriginalExtension();
 
         foreach ($this->formats as $format => $dimensions)
         {
@@ -98,38 +99,58 @@ class UploadController extends Controller
     /*
     *
     */
-    public function getServerPhotos($bid_id)
+    public function getPhotos(Request $request, $bid_id = null)
     {
         $res = [];
 
-        $photos = Photo::where('bid_id', $bid_id)->where('format', 'thumb')->get();
-
-        for ($i = 1; $i <= Bid::where('id', $bid_id)->first()->photo_count; $i++)
+        if (!Bid::where('id', $bid_id)->exists())
         {
-            $photo = $photos[$i - 1];
+            if ($request->session()->has('temp_folder_name'))
+            {
+                $path = 'temp/' . $request->session()->get('temp_folder_name');
 
-            $filename = $photo->filename;
+                $directories = Storage::disk('public')->directories($path);
 
-            $res[] = [
-                'filename' => $filename,
-                'size' => Storage::disk('public')->size($bid_id . '/original/' . $filename),
-                'server' => url(Storage::disk('public')->url($bid_id . '/thumb/' . $filename))
-            ];
+                foreach($directories as $directory)
+                {
+                    if (strcmp(substr($directory, strrpos($directory, '/') + 1), 'original') == 0)
+                    {
+                        $files = Storage::disk('public')->files($directory);
+
+                        foreach($files as $file)
+                        {
+                            $filename = substr($file, strrpos($file, '/') + 1);
+
+                            $res[] = [
+                                'filename' => $filename,
+                                'size' => Storage::disk('public')->size($path . '/original/' . $filename),
+                                'server' => url(Storage::disk('public')->url($path . '/thumb/' . $filename))
+                            ];
+                        }
+                    }
+                }
+            }
+        }
+        else
+        {
+            $photos = Photo::where('bid_id', $bid_id)->where('format', 'thumb')->get();
+
+            for ($i = 1; $i <= Bid::where('id', $bid_id)->first()->photo_count; $i++)
+            {
+                $photo = $photos[$i - 1];
+
+                $filename = $photo->filename;
+
+                $res[] = [
+                    'filename' => $filename,
+                    'size' => Storage::disk('public')->size($bid_id . '/original/' . $filename),
+                    'server' => url(Storage::disk('public')->url($bid_id . '/thumb/' . $filename))
+                ];
+            }
         }
 
         return response()->json([
             'photos' => $res
         ]);
-    }
-
-    function random_string($length) {
-        $key = '';
-        $keys = array_merge(range(0, 9), range('a', 'z'));
-
-        for ($i = 0; $i < $length; $i++) {
-            $key .= $keys[array_rand($keys)];
-        }
-
-        return $key;
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Photo;
+use Storage;
 
 class BidRequest extends FormRequest
 {
@@ -25,7 +26,7 @@ class BidRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'name' => "required|min:20",
+            'name' => "required|min:14",
             'district' => "required|min:2",
             'description' => "required|min:140",
             'ground' => "required|numeric",
@@ -37,7 +38,6 @@ class BidRequest extends FormRequest
         return $rules;
     }
 
-    /*
     public function validator($factory)
     {
         $validator = $factory->make(
@@ -54,10 +54,17 @@ class BidRequest extends FormRequest
 
         return $validator;
     }
-    */
 
     private function noPhoto()
     {
-        return Photo::where('bid_id', $this->segment(2))->count() == 0;
+
+        if ($this->session()->has('temp_folder_name'))
+        {
+            $path = 'temp/' . $this->session()->get('temp_folder_name');
+
+            return count(Storage::disk('public')->files($path . '/original')) == 0;
+        }
+
+        return true;
     }
 }

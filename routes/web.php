@@ -20,7 +20,7 @@ Route::group(['middleware' => ['cas.auth', 'register']], function() {
     Route::post('upload', 'UploadController@upload');
     Route::post('upload/delete', 'UploadController@delete');
 
-    Route::get('server-photos/{id}', ['uses' => 'UploadController@getServerPhotos']);
+    Route::get('photos/{id?}', 'UploadController@getPhotos');
 
     Route::resource('bids', 'BidController');
 
