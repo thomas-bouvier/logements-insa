@@ -60,15 +60,8 @@ class BidController extends Controller
         return view('bids.create', compact('bid'));
     }
 
-    public function store(BidRequest $request)
+    private function storePhotos($bid, BidRequest $request)
     {
-        $data = $request->all();
-        $data['user_id'] = User::where('login', cas()->user())->first()->id;
-
-        $bid = Bid::create($data);
-
-        // Creating DB records for photos
-
         if ($request->session()->has('temp_folder_name'))
         {
             $path = 'temp/' . $request->session()->get('temp_folder_name');
@@ -107,6 +100,18 @@ class BidController extends Controller
 
             $request->session()->forget('temp_folder_name');
         }
+    }
+
+    public function store(BidRequest $request)
+    {
+        $data = $request->all();
+        $data['user_id'] = User::where('login', cas()->user())->first()->id;
+
+        $bid = Bid::create($data);
+
+        // Creating DB records for photos
+
+        $this->storePhotos($bid, $request);
 
         // Sending a mail to moderators
 
@@ -130,6 +135,10 @@ class BidController extends Controller
         $data['user_id'] = User::where('login', cas()->user())->first()->id;
 
         $bid->update($data);
+
+        // Creating DB records for photos
+
+        $this->storePhotos($bid, $request);
 
         if ($bid->isPostponed())
         {

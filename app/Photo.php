@@ -14,7 +14,7 @@ class Photo extends Model
     }
 
     public static $rules = [
-        'file' => 'mimes:png,jpeg,jpg,bmp|size:5120'
+        'file' => 'mimes:png,jpeg,jpg,bmp|max:5120'
     ];
 
     public static $messages = [
