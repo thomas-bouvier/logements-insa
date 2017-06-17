@@ -21,6 +21,9 @@ class UploadController extends Controller
       'large' => [940, 530]
     ];
 
+    /*
+    *
+    */
     public function upload(Request $request)
     {
         $input = Input::all();
@@ -61,27 +64,40 @@ class UploadController extends Controller
         Storage::disk('public')->put('temp/' . $temp_folder_name . '/original/' . $filename, Image::make($photo)->stream()->__toString());
     }
 
+    /*
+    *
+    */
     public function delete()
     {
         $bid_id = Input::get('id');
         $filename = Input::get('filename');
 
-        foreach ($this->formats as $format => $dimensions)
-        {
-            $filename = preg_replace('/(.*_)(.*)(\..*)/', "$1$format$3", $filename);
+        $directories = Storage::disk('public')->directories($bid_id);
 
-            Storage::disk('public')->delete($this->getStorageDirectory($bid_id) . '/' . $filename);
-            Photo::where('filename', $filename)->where('bid_id', $bid_id)->delete();
+        foreach($directories as $directory)
+        {
+            $files = Storage::disk('public')->files($directory);
+
+            foreach($files as $file)
+            {
+                if (substr($file, strrpos($file, '/') + 1) == $filename)
+                {
+                    Photo::where('filename', $filename)->where('bid_id', $bid_id)->where('format', substr($directory, strrpos($directory, '/') + 1))->delete();
+
+                    Storage::disk('public')->delete($file);
+                }
+            }
         }
 
-        $filename = preg_replace('/(.*_)(.*)(\..*)/', "$1original$3", $filename);
+        $bid = Bid::findOrFail($bid_id);
 
-        Storage::disk('public')->delete($this->getStorageDirectory($bid_id) . '/' . $filename);
-        Photo::where('filename', $filename)->where('bid_id', $bid_id)->delete();
-
-        DB::table('bids')->decrement('photo_count');
+        $bid->photo_count = count(Storage::disk('public')->files($bid_id . '/original'));
+        $bid->save();
     }
 
+    /*
+    *
+    */
     public function getServerPhotos($bid_id)
     {
         $res = [];
@@ -104,11 +120,6 @@ class UploadController extends Controller
         return response()->json([
             'photos' => $res
         ]);
-    }
-
-    public function getStorageDirectory($bid_id)
-    {
-        return ceil($bid_id / 250);
     }
 
     function random_string($length) {
