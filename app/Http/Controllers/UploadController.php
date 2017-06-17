@@ -29,7 +29,6 @@ class UploadController extends Controller
     {
         $input = Input::all();
 
-        /*
         $validator = Validator::make($input, Photo::$rules, Photo::$messages);
 
         if ($validator->fails())
@@ -40,7 +39,6 @@ class UploadController extends Controller
                 'code' => 400
             ], 400);
         }
-        */
 
         $photo = $input['file'];
 

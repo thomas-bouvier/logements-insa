@@ -47,11 +47,30 @@ Dropzone.options.myDropzone = {
                 dataType: 'html'
             })
         });
+    },
+
+    error: function(file, response) {
+        if ($.type(response) === "string")
+            var message = response; // dropzone sends it's own error messages in string
+        else
+            var message = response.message;
+
+        file.previewElement.classList.add("dz-error");
+
+        _ref = file.previewElement.querySelectorAll("[data-dz-errormessage]");
+        _results = [];
+
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            node = _ref[_i];
+            _results.push(node.textContent = message);
+        }
+
+        return _results;
     }
 };
 
 $(document).ready(function() {
-  $("#my-dropzone").dropzone({
-    url: "/upload"
-  });
+    $("#my-dropzone").dropzone({
+        url: "/upload"
+    });
 });
