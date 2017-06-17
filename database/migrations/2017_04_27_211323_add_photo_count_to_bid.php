@@ -14,7 +14,7 @@ class AddPhotoCountToBid extends Migration
     public function up()
     {
         Schema::table('bids', function (Blueprint $table) {
-            $table->integer('photo_count')->unsigned;
+            $table->integer('photo_count')->unsigned()->default(0);
         });
     }
 

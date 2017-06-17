@@ -1,4 +1,4 @@
-{!! Form::model($type, ['class' => 'form-horizontal', 'url' => route("types.$action", $type), 'method' => $action == "store" ? "Post" : "Put"]) !!}
+{!! Form::model($type, ['class' => 'form-horizontal', 'url' => route("admin.types.$action", $type), 'method' => $action == "store" ? "Post" : "Put"]) !!}
 
   <div class="form-group">
     <label class="control-label">Nom</label>

@@ -25,7 +25,7 @@ class BidController extends Controller
     {
         $user_id = User::where('login', cas()->user())->first()->id;
 
-        $bids = Bid::notDraft()->where('user_id', $user_id)->get();
+        $bids = Bid::where('user_id', $user_id)->get();
         $bids->load('type');
 
         return view('bids.index', compact('bids'));
@@ -50,17 +50,14 @@ class BidController extends Controller
     public function create()
     {
         $bid = new Bid();
-        //$bid = Bid::draft();
 
         return view('bids.create', compact('bid'));
-        //return $this->edit($bid);
     }
 
     public function store(BidRequest $request)
     {
         $data = $request->all();
         $data['user_id'] = User::where('login', cas()->user())->first()->id;
-        $data['photo_count'] = 1;
 
         $bid = Bid::create($data);
 
@@ -92,6 +89,9 @@ class BidController extends Controller
                     Storage::disk('public')->move($file, $bid->id . '/' . $format . '/' . $filename);
                 }
             }
+
+            $bid->photo_count = count(Storage::disk('public')->files($bid->id . '/original'));
+            $bid->save();
 
             // Deleting temp directory
 

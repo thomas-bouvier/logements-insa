@@ -26,7 +26,9 @@ class AddModerationColumnsToBid extends Migration
      */
     public function down()
     {
-        $table->dropColumn('status');
-        $table->dropColumn('moderated_at');
+        Schema::table('bids', function (Blueprint $table) {
+            $table->dropColumn('status');
+            $table->dropColumn('moderated_at');
+        });
     }
 }
