@@ -6,7 +6,7 @@
         <div class="col-sm-6">
           <div class="form-group">
             <label class="control-label">Titre</label>
-            {!! Form::text('name', null, ['class' => 'form-control']) !!}
+            {!! Form::text('titre', null, ['class' => 'form-control']) !!}
           </div>
         </div>
 
@@ -22,14 +22,14 @@
         <div class="col-sm-6">
           <div class="form-group">
             <label class="control-label">Quartier</label>
-            {!! Form::text('district', null, ['class' => 'form-control']) !!}
+            {!! Form::text('quartier', null, ['class' => 'form-control']) !!}
           </div>
         </div>
 
         <div class="col-sm-6">
           <div class="form-group">
             <label class="control-label">Surface (m<sup>2</sup>)</label>
-            {!! Form::text('ground', null, ['class' => 'form-control']) !!}
+            {!! Form::text('surface', null, ['class' => 'form-control']) !!}
           </div>
         </div>
       </div>
@@ -38,7 +38,7 @@
         <div class="col-sm-6">
           <div class="form-group">
             <label class="control-label">Montant du loyer (€)</label>
-            {!! Form::text('rental', null, ['class' => 'form-control']) !!}
+            {!! Form::text('loyer', null, ['class' => 'form-control']) !!}
           </div>
         </div>
 
