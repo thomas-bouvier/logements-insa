@@ -17,36 +17,13 @@ class Bid extends Model
 
     public $dates = ['created_at', 'updated_at'];
 
-    public $formats = [
-      'thumb' => [360, 200],
-      'large' => [940, 530]
-    ];
-
     public static function boot()
     {
         parent::boot();
 
         static::deleting(function($instance)
         {
-            $photos = Photo::where('bid_id', $instance->id)->get();
-
-            foreach ($photos as $photo)
-            {
-                $filename = $photo->filename;
-
-                foreach ($instance->formats as $format => $dimensions)
-                {
-                    $filename = preg_replace('/(.*_)(.*)(\..*)/', "$1$format$3", $filename);
-
-                    Storage::disk('public')->delete($instance->getStorageDirectory($instance->id) . '/' . $filename);
-                    Photo::where('filename', $filename)->where('bid_id', $instance->id)->delete();
-                }
-
-                $filename = preg_replace('/(.*_)(.*)(\..*)/', "$1original$3", $filename);
-
-                Storage::disk('public')->delete($instance->getStorageDirectory($instance->id) . '/' . $filename);
-                Photo::where('filename', $filename)->where('bid_id', $instance->id)->delete();
-            }
+            Storage::disk('public')->deleteDirectory($instance->id);
 
             return true;
         });
