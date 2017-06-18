@@ -29,7 +29,7 @@ class UploadController extends Controller
     {
         $input = Input::all();
 
-        $validator = Validator::make($input, Photo::$rules, Photo::$messages);
+        $validator = Validator::make($input, Photo::$rules);
 
         if ($validator->fails())
         {

@@ -57,6 +57,13 @@ class BidRequest extends FormRequest
 
     private function noPhoto()
     {
+        if ($this->isMethod('put'))
+        {
+            if (!$this->session()->has('temp_folder_name'))
+            {
+                return count(Storage::disk('public')->files($this->segment(2) . '/original')) == 0;
+            }
+        }
 
         if ($this->session()->has('temp_folder_name'))
         {
