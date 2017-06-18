@@ -23,7 +23,7 @@ class Owner
         $reflection_method = new ReflectionMethod($controller_name, 'getResource');
         $resource = $reflection_method->invokeArgs($controller, $request->route()->parameters());
 
-        if (User::where('login', cas()->user())->first()->id != $resource->user_id)
+        if (User::where('login', cas()->user())->first()->id != $resource->user_id && User::where('login', cas()->user())->first()->role != 'admin')
         {
             if ($request->ajax())
             {
@@ -31,7 +31,7 @@ class Owner
             }
             else
             {
-                return redirect('/');
+                return redirect('/home');
             }
         }
 

@@ -9,7 +9,7 @@
 @section('content')
 
 <div class="container">
-  @if ($bid->name == null)
+  @if (is_null($bid->name))
     <h4>Ajouter une annonce</h4>
   @else
     <h4>Éditer l'annonce « {{ $bid->name }} »</h4>
