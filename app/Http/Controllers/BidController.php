@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Session;
 use Storage;
+use Mail;
 use Illuminate\Http\Request;
 use App\Http\Requests\BidRequest;
 use App\Bid;
@@ -115,11 +116,12 @@ class BidController extends Controller
 
         // Sending a mail to moderators
 
-        /*
-        Mail::send(['emails.create', 'emails.create_text'], ['bid' => $bid], function($message) {
-            $message->to('tbouvier@insa-rennes.fr')->subject('Modération');
+        $emails = $this->adminEmails();
+
+        Mail::send('emails.create', ['bid' => $bid, 'author' => cas()->user()], function($message) use ($emails)
+        {
+            $message->to($emails);
         });
-        */
 
         return redirect(route('bids.index'))->with('success', "Votre annonce a bien été créée. Elle est maintenant en cours de modération, et sera bientôt en ligne.");
     }
@@ -155,5 +157,18 @@ class BidController extends Controller
         $bid->delete();
 
         return redirect(route('bids.index'))->with('success', "Votre annonce a bien été supprimée.");
+    }
+
+    private function adminEmails()
+    {
+        $admins = User::admin()->get();
+        $res = [];
+
+        foreach ($admins as $admin)
+        {
+            $res[] = $admin->email();
+        }
+
+        return $res;
     }
 }

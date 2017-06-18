@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Mail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Bid;
+use App\User;
 
 class BidController extends Controller
 {
@@ -25,8 +27,16 @@ class BidController extends Controller
     public function approve($id)
     {
         $bid = Bid::findOrFail($id);
-
         $bid->markApproved();
+
+        // Sending a mail to author
+
+        $email = User::where('id', $bid->user_id)->first()->email();
+
+        Mail::send('emails.approve', ['bid' => $bid], function($message) use ($email)
+        {
+            $message->to($email);
+        });
 
         return redirect(route('admin.bids.index'))->with('success', 'L\'annonce a été modérée avec succès et est maintenant en ligne.');
     }
@@ -34,8 +44,16 @@ class BidController extends Controller
     public function reject($id)
     {
         $bid = Bid::findOrFail($id);
-
         $bid->markRejected();
+
+        // Sending a mail to author
+
+        $email = User::where('id', $bid->user_id)->first()->email();
+
+        Mail::send('emails.reject', ['bid' => $bid], function($message) use ($email)
+        {
+            $message->to($email);
+        });
 
         return redirect(route('admin.bids.index'))->with('success', 'L\'annonce a été modérée avec succès et est maintenant supprimée.');
     }
@@ -43,8 +61,16 @@ class BidController extends Controller
     public function postpone($id)
     {
         $bid = Bid::findOrFail($id);
-
         $bid->markPostponed();
+
+        // Sending a mail to author
+
+        $email = User::where('id', $bid->user_id)->first()->email();
+
+        Mail::send('emails.postpone', ['bid' => $bid], function($message) use ($email)
+        {
+            $message->to($email);
+        });
 
         return redirect(route('admin.bids.index'))->with('success', 'L\'annonce a été modérée avec succès et a bien été mise en attente.');
     }
