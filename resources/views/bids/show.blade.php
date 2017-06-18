@@ -66,7 +66,7 @@
                     </li>
 
                     <li>
-                        Localisation : {{ $bid->district }}
+                        Localisation : {{ $bid->location }}
                     </li>
                 </ul>
             </div>

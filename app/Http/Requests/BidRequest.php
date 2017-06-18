@@ -26,11 +26,11 @@ class BidRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'titre' => "required|min:10|max:140",
-            'quartier' => "required|min:2|max:70",
+            'name' => "required|min:10|max:140",
+            'location' => "required|min:2|max:70",
             'description' => "required|min:140|max:2000",
-            'surface' => "required|numeric|max:1000",
-            'loyer' => "required|numeric|max:10000",
+            'ground' => "required|numeric|max:1000",
+            'rental' => "required|numeric|max:10000",
             'type_id' => "required|exists:types,id",
             'email' => "required|email"
         ];

@@ -17,11 +17,12 @@ class CreateBidsTable extends Migration
             $table->increments('id');
             $table->string('name')->nullable();
             $table->integer('type_id')->unsigned()->index();
+            $table->foreign('type_id')->references('id')->on('types')->onDelete('cascade');
             $table->integer('user_id')->unsigned()->index();
             $table->integer('rental')->unsigned();
             $table->integer('ground')->unsigned();
             $table->text('description');
-            $table->string('district');
+            $table->string('location');
             $table->timestamps();
         });
     }

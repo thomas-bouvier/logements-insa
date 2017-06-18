@@ -25,7 +25,7 @@ class TypeRequest extends FormRequest
     {
         return [
             'name' => 'required|min:2|max:20|unique:types,name',
-            'slug' => 'min:2|max:20|unique:types,slug'
+            'slug' => 'nullable|min:2|max:20|unique:types,slug'
         ];
     }
 }

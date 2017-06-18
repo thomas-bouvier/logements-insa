@@ -67,7 +67,7 @@
                             </li>
 
                             <li>
-                                <a href="{{ route('admin.types.index') }}">Gérer les types de bien</a>
+                                <a href="{{ route('admin.types.index') }}">Gérer les catégories</a>
                             </li>
 
                               <li class="divider"></li>
