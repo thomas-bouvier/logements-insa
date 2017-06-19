@@ -1,80 +1,90 @@
 body {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
 
 .content {
-  flex: 1;
+    flex: 1;
 }
 
 .welcome-logo {
-  max-width: 150px;
-  display: block;
-  margin-top: 20px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 20px;
+    max-width: 150px;
+    display: block;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
 }
 
 .welcome-desc {
-  text-align: center;
+    text-align: center;
 }
 
 .welcome-btn {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-  margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .footer {
-  margin-top: 30px;
-  padding-top: 20px;
-  padding-bottom: 12px;
-  box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.3);
+    margin-top: 30px;
+    padding-top: 20px;
+    padding-bottom: 12px;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .quick-info {
-  font-size: 1.15em;
+    font-size: 1.15em;
 }
 
 .bid {
-  margin-bottom: 50px !important;
+    margin-bottom: 50px !important;
 }
 
 .bid-title {
-  margin-bottom: 10px !important;
+    margin-bottom: 10px !important;
 }
 
 .bid-description {
-  word-wrap: break-word;
+    word-wrap: break-word;
 }
 
 h5.bid-description-title {
-  margin-top: 45px !important;
+    margin-top: 45px !important;
 }
 
 h5.bid-details-title {
-  margin-top: 35px !important;
+    margin-top: 35px !important;
 }
 
 .navbar-brand-name > {
-  display: inline-block;
-  float: left;
+    display: inline-block;
+    float: left;
 }
 
 .navbar-brand-name > img {
-  display: inline-block;
-  float: left;
-  margin-top: -14px;
-  margin-right: 10px;
-  max-width: 35px;
+    display: inline-block;
+    float: left;
+    margin-top: -14px;
+    margin-right: 10px;
+    max-width: 35px;
 }
 
 @media screen and (max-width: 992px) {
-  p.author {
-    margin-top: 10px !important;
-    margin-bottom: -10px !important;
-  }
+    p.author {
+        margin-top: 10px !important;
+        margin-bottom: -10px !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    a.btn-responsive {
+        font-size: 0px !important;
+    }
+
+    a.btn-responsive i {
+        font-size: 14px !important;
+    }
 }

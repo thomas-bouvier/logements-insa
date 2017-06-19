@@ -20,17 +20,17 @@
         <tbody>
             @foreach($pending_bids as $pending_bid)
             <tr>
-                <td>{{ App\User::where('id', $pending_bid->user_id)->first()->login }} <a class="btn btn-default" href="mailto:{{ App\User::where('id', $pending_bid->user_id)->first()->login }}@insa-rennes.fr">Contacter</a></td>
+                <td>{{ App\User::where('id', $pending_bid->user_id)->first()->login }} <a class="btn btn-default btn-responsive" href="mailto:{{ App\User::where('id', $pending_bid->user_id)->first()->login }}@insa-rennes.fr"><i class="glyphicon glyphicon-envelope"></i> Contacter</a></td>
                 <td>{{ $pending_bid->name }}</td>
                 <td>
-                    <a class="btn btn-primary" href="{{ route('bids.show', $pending_bid) }}">Voir</a>
-                    <a class="btn btn-default" href="{{ route('bids.edit', $pending_bid) }}">Éditer</a>
-                    <a class="btn btn-danger" href="{{ route('bids.destroy', $pending_bid) }}" data-method="delete" data-confirm="Voulez-vous vraiment supprimer l'annonce « {{ $pending_bid->name }} » ?">Supprimer</a>
+                    <a class="btn btn-primary btn-responsive" href="{{ route('bids.show', $pending_bid) }}"><i class="glyphicon glyphicon-eye-open"></i> Voir</a>
+                    <a class="btn btn-default btn-responsive" href="{{ route('bids.edit', $pending_bid) }}"><i class="glyphicon glyphicon-pencil"></i> Éditer</a>
+                    <a class="btn btn-danger btn-responsive" href="{{ route('bids.destroy', $pending_bid) }}" data-method="delete" data-confirm="Voulez-vous vraiment supprimer l'annonce « {{ $pending_bid->name }} » ?"><i class="glyphicon glyphicon-trash"></i> Supprimer</a>
                 </td>
                 <td>
-                    <a class="btn btn-success" href="{{ action('Admin\\BidController@approve', $pending_bid) }}">Approuver</a>
-                    <a class="btn btn-warning" href="{{ action('Admin\\BidController@postpone', $pending_bid) }}">Mettre en attente</a>
-                    <a class="btn btn-danger" href="{{ action('Admin\\BidController@reject', $pending_bid) }}" data-confirm="Voulez-vous vraiment rejeter l'annonce « {{ $pending_bid->name }} » ? Celle-ci sera définitivement supprimée !">Rejeter</a>
+                    <a class="btn btn-success btn-responsive" href="{{ action('Admin\\BidController@approve', $pending_bid) }}"><i class="glyphicon glyphicon-ok"></i> Approuver</a>
+                    <a class="btn btn-warning btn-responsive" href="{{ action('Admin\\BidController@postpone', $pending_bid) }}"><i class="glyphicon glyphicon-time"></i> Reporter</a>
+                    <a class="btn btn-danger btn-responsive" href="{{ action('Admin\\BidController@reject', $pending_bid) }}" data-confirm="Voulez-vous vraiment rejeter l'annonce « {{ $pending_bid->name }} » ? Celle-ci sera définitivement supprimée !"><i class="glyphicon glyphicon-remove"></i> Rejeter</a>
                 </td>
             </tr>
             @endforeach
