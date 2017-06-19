@@ -49,12 +49,12 @@
         </div>
 
         <div class="col-md-3">
-            <p>Annonce publiée le {{ $bid->created_at->formatLocalized('%d %B %Y') }} par {{ App\User::where('id', $bid->user_id)->first()->login }} ({{ $bid->created_at->diffForHumans() }}).</p>
+            <p class="author">Annonce publiée le {{ $bid->created_at->formatLocalized('%d %B %Y') }} par {{ App\User::where('id', $bid->user_id)->first()->login }} ({{ $bid->created_at->diffForHumans() }}).</p>
             <h5 class="bid-details-title">Caractéristiques</h5>
             <p class="bid-details">
                 <ul>
                     <li>
-                        Type de bien : {{ $bid->type->name }}
+                        Catégorie : {{ $bid->type->name }}
                     </li>
 
                     <li>

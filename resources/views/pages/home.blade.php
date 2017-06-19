@@ -27,7 +27,7 @@
                         <p class="bid-details">
                             <ul>
                                 <li>
-                                    Type de bien : {{ $bid->type->name }}
+                                    Catégorie : {{ $bid->type->name }}
                                 </li>
 
                                 <li>
