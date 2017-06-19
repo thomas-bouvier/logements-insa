@@ -9,13 +9,13 @@
 @section('content')
 
 <div class="container">
-  @if (is_null($bid->name))
-    <h4>Ajouter une annonce</h4>
-  @else
-    <h4>Éditer l'annonce « {{ $bid->name }} »</h4>
-  @endif
+    @if (is_null($bid->name))
+        <h4>Ajouter une annonce</h4>
+    @else
+        <h4>Éditer l'annonce « {{ $bid->name }} »</h4>
+    @endif
 
-  @include('bids.form', ['action' => 'update'])
+    @include('bids.form', ['action' => 'update'])
 </div>
 
 @endsection

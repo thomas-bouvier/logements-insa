@@ -15,7 +15,7 @@
         <thead>
             <tr>
                 <th>Nom</th>
-                <th>Type de bien</th>
+                <th>Catégorie</th>
                 <th>Statut</th>
                 <th>Actions</th>
             </tr>
