@@ -54,9 +54,9 @@
                 <td>{{ App\User::where('id', $postponed_bid->user_id)->first()->login }} <a class="btn btn-default" href="mailto:{{ App\User::where('id', $postponed_bid->user_id)->first()->login }}@insa-rennes.fr">Contacter</a></td>
                 <td>{{ $postponed_bid->name }}</td>
                 <td>
-                    <a class="btn btn-primary" href="{{ route('bids.show', $postponed_bid) }}">Voir</a>
-                    <a class="btn btn-default" href="{{ route('bids.edit', $postponed_bid) }}">Éditer</a>
-                    <a class="btn btn-danger" href="{{ route('bids.destroy', $postponed_bid) }}" data-method="delete" data-confirm="Voulez-vous vraiment supprimer l'annonce « {{ $postponed_bid->name }} » ?">Supprimer</a>
+                    <a class="btn btn-primary btn-responsive" href="{{ route('bids.show', $postponed_bid) }}"><i class="glyphicon glyphicon-eye-open"></i> Voir</a>
+                    <a class="btn btn-default btn-responsive" href="{{ route('bids.edit', $postponed_bid) }}"><i class="glyphicon glyphicon-pencil"></i> Éditer</a>
+                    <a class="btn btn-danger btn-responsive" href="{{ route('bids.destroy', $postponed_bid) }}" data-method="delete" data-confirm="Voulez-vous vraiment supprimer l'annonce « {{ $postponed_bid->name }} » ?"><i class="glyphicon glyphicon-trash"></i> Voir</a>
                 </td>
             </tr>
             @endforeach
@@ -80,9 +80,9 @@
                 <td>{{ App\User::where('id', $approved_bid->user_id)->first()->login }} <a class="btn btn-default" href="mailto:{{ App\User::where('id', $approved_bid->user_id)->first()->login }}@insa-rennes.fr">Contacter</a></td>
                 <td>{{ $approved_bid->name }}</td>
                 <td>
-                    <a class="btn btn-primary" href="{{ route('bids.show', $approved_bid) }}">Voir</a>
-                    <a class="btn btn-default" href="{{ route('bids.edit', $approved_bid) }}">Éditer</a>
-                    <a class="btn btn-danger" href="{{ route('bids.destroy', $approved_bid) }}" data-method="delete" data-confirm="Voulez-vous vraiment supprimer l'annonce « {{ $approved_bid->name }} » ?">Supprimer</a>
+                    <a class="btn btn-primary btn-responsive" href="{{ route('bids.show', $approved_bid) }}"><i class="glyphicon glyphicon-eye-open"></i> Voir</a>
+                    <a class="btn btn-default btn-responsive" href="{{ route('bids.edit', $approved_bid) }}"><i class="glyphicon glyphicon-pencil"></i> Éditer</a>
+                    <a class="btn btn-danger btn-responsive" href="{{ route('bids.destroy', $approved_bid) }}" data-method="delete" data-confirm="Voulez-vous vraiment supprimer l'annonce « {{ $approved_bid->name }} » ?"><i class="glyphicon glyphicon-trash"></i> Supprimer</a>
                 </td>
             </tr>
             @endforeach
