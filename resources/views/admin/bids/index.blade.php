@@ -51,7 +51,7 @@
         <tbody>
             @foreach($postponed_bids as $postponed_bid)
             <tr>
-                <td>{{ App\User::where('id', $postponed_bid->user_id)->first()->login }} <a class="btn btn-default" href="mailto:{{ App\User::where('id', $postponed_bid->user_id)->first()->login }}@insa-rennes.fr">Contacter</a></td>
+                <td>{{ App\User::where('id', $postponed_bid->user_id)->first()->login }} <a class="btn btn-default btn-responsive" href="mailto:{{ App\User::where('id', $postponed_bid->user_id)->first()->login }}@insa-rennes.fr"><i class="glyphicon glyphicon-envelope"></i> Contacter</a></td>
                 <td>{{ $postponed_bid->name }}</td>
                 <td>
                     <a class="btn btn-primary btn-responsive" href="{{ route('bids.show', $postponed_bid) }}"><i class="glyphicon glyphicon-eye-open"></i> Voir</a>
@@ -77,7 +77,7 @@
         <tbody>
             @foreach($approved_bids as $approved_bid)
             <tr>
-                <td>{{ App\User::where('id', $approved_bid->user_id)->first()->login }} <a class="btn btn-default" href="mailto:{{ App\User::where('id', $approved_bid->user_id)->first()->login }}@insa-rennes.fr">Contacter</a></td>
+                <td>{{ App\User::where('id', $approved_bid->user_id)->first()->login }} <a class="btn btn-default btn-responsive" href="mailto:{{ App\User::where('id', $approved_bid->user_id)->first()->login }}@insa-rennes.fr"><i class="glyphicon glyphicon-envelope"></i> Contacter</a></td>
                 <td>{{ $approved_bid->name }}</td>
                 <td>
                     <a class="btn btn-primary btn-responsive" href="{{ route('bids.show', $approved_bid) }}"><i class="glyphicon glyphicon-eye-open"></i> Voir</a>
