@@ -173,6 +173,9 @@
 .dropzone, .dropzone * {
   box-sizing: border-box; }
 
+.has-error .dropzone {
+    border: 2px solid #e51c23 !important;
+}
 .dropzone {
   min-height: 150px;
   border: 1px solid #d8d8d8;

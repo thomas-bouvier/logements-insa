@@ -5,7 +5,7 @@
 <div class="container">
   <h4>Éditer la catégorie « {{ $type->name }} »</h4>
 
-  @include('types.form', ['action' => 'update'])
+  @include('admin.types.form', ['action' => 'update'])
 </div>
 
 @endsection
